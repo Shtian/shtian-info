@@ -1,8 +1,13 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import SpacePageLayout from '../layouts/SpacePageLayout.astro';
+const projects = await getCollection('projects');
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<SpacePageLayout>
+	<ul>
+		{projects.map(project => (
+			<li><a href={`/projects/${project.id}`}>{project.data.name}</a></li>
+		  ))}
+	</ul>
+</SpacePageLayout>
