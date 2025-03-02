@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import Prose from "../../components/Prose.astro";
 import SpacePageLayout from "../../layouts/SpacePageLayout.astro";
+import ProjectPageLayout from "../../layouts/ProjectPageLayout.astro";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
@@ -15,8 +16,14 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 ---
 
-<SpacePageLayout>
+<ProjectPageLayout title={project.data.name}>
+  <div class="my-16 w-full rounded-lg grid place-content-center p-8">
+    <img
+      class="max-w-full rounded-lg object-cover"
+      src={project.data.cover.src}
+    />
+  </div>
   <Prose>
     <Content />
   </Prose>
-</SpacePageLayout>
+</ProjectPageLayout>

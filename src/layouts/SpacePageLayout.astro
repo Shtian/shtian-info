@@ -3,12 +3,14 @@ import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import { Stars } from "../components/Stars";
 import Layout from "./Layout.astro";
+
+const { title } = Astro.props;
 ---
 
-<Layout>
+<Layout title={title}>
   <Stars />
   <Header />
-  <main class="h">
+  <main class="relative min-h-[75svh]">
     <div class="mx-auto max-w-5xl px-4 lg:px-8">
       <slot />
     </div>

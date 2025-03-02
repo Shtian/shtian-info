@@ -11,10 +11,10 @@ const projects = await getCollection("projects");
 
 <style>
   .planet-grid-columns {
-    --min-size: 300px;
+    --min-size: 280px;
     grid-template-columns: repeat(
       var(--grid-type, auto-fit),
-      minmax(min(180px, 100%), 1fr)
+      minmax(min(var(--min-size), 100%), 1fr)
     );
   }
 </style>
