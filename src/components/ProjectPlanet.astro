@@ -14,14 +14,16 @@ const { project } = Astro.props;
   <a class="grid place-items-center" href={`/projects/${project.id}`}
     ><img
       class="size-40 rounded-full max-w-full h-full aspect-square"
-      src="https://placehold.co/400"
+      src={project.data.cover.src}
+      height={project.data.cover.height}
+      width={project.data.cover.width}
     /></a
   >
   <p class="text-lg text-center">
     {project.data.name}
   </p>
-  <p>{project.data.description}</p>
-  <div class="flex gap-1 flex-wrap">
+  <p class="text-sm text-center">{project.data.description}</p>
+  <div class="flex gap-1 flex-wrap justify-center">
     {
       project.data.tags.map((tag) => (
         <span class="bg-accent rounded-md px-2 py-1 text-xs">{tag}</span>
