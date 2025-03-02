@@ -1,0 +1,20 @@
+---
+import { getCollection } from "astro:content";
+import ProjectPlanet from "./ProjectPlanet.astro";
+
+const projects = await getCollection("projects");
+---
+
+<section class="grid gap-2 planet-grid-columns">
+  {projects.map((project) => <ProjectPlanet project={project} />)}
+</section>
+
+<style>
+  .planet-grid-columns {
+    --min-size: 300px;
+    grid-template-columns: repeat(
+      var(--grid-type, auto-fit),
+      minmax(min(180px, 100%), 1fr)
+    );
+  }
+</style>

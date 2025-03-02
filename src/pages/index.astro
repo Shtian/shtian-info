@@ -1,17 +1,12 @@
 ---
-import { getCollection, render } from "astro:content";
 import SpacePageLayout from "../layouts/SpacePageLayout.astro";
-const projects = await getCollection("projects");
+import Hero from "../components/Hero.astro";
+import ProjectPlanets from "../components/ProjectPlanets.astro";
 ---
 
 <SpacePageLayout>
-  <ul>
-    {
-      projects.map((project) => (
-        <li>
-          <a href={`/projects/${project.id}`}>{project.data.name}</a>
-        </li>
-      ))
-    }
-  </ul>
+  <div class="flex flex-col gap-8 my-16">
+    <Hero />
+    <ProjectPlanets />
+  </div>
 </SpacePageLayout>
