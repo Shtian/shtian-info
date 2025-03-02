@@ -1,11 +1,11 @@
 ---
-import { getCollection, render } from 'astro:content';
-import Prose from '../../components/Prose.astro';
-import SpacePageLayout from '../../layouts/SpacePageLayout.astro';
+import { getCollection, render } from "astro:content";
+import Prose from "../../components/Prose.astro";
+import SpacePageLayout from "../../layouts/SpacePageLayout.astro";
 
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');
-  return projects.map(project => ({
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
     params: { id: project.id },
     props: { project },
   }));
@@ -14,6 +14,7 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content } = await render(project);
 ---
+
 <SpacePageLayout>
   <Prose>
     <Content />

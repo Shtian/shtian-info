@@ -1,13 +1,17 @@
 ---
-import { getCollection, render } from 'astro:content';
-import SpacePageLayout from '../layouts/SpacePageLayout.astro';
-const projects = await getCollection('projects');
+import { getCollection, render } from "astro:content";
+import SpacePageLayout from "../layouts/SpacePageLayout.astro";
+const projects = await getCollection("projects");
 ---
 
 <SpacePageLayout>
-	<ul>
-		{projects.map(project => (
-			<li><a href={`/projects/${project.id}`}>{project.data.name}</a></li>
-		  ))}
-	</ul>
+  <ul>
+    {
+      projects.map((project) => (
+        <li>
+          <a href={`/projects/${project.id}`}>{project.data.name}</a>
+        </li>
+      ))
+    }
+  </ul>
 </SpacePageLayout>

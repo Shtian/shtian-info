@@ -1,23 +1,27 @@
 ---
-import '../styles/global.css'
+import "../styles/global.css";
 ---
+
 <!doctype html>
-<html lang="en" class="m-0 w-full h-full ">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Shtian's universe</title>
-		<script>
-		document.documentElement.classList.toggle(
-			"dark",
-			localStorage.theme === "dark" ||
-			  (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
-		  );
-		  </script>
-	</head>
-	<body class="m-0 w-full h-full bg-background text-foreground transition-colors">
-		<slot />
-	</body>
+<html lang="en" class="m-0 w-full h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Shtian's universe</title>
+    <script>
+      document.documentElement.classList.toggle(
+        "dark",
+        localStorage.theme === "dark" ||
+          (!("theme" in localStorage) &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches),
+      );
+    </script>
+  </head>
+  <body
+    class="m-0 w-full h-full bg-background text-foreground transition-colors"
+  >
+    <slot />
+  </body>
 </html>

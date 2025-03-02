@@ -5,9 +5,9 @@ date: 2024-01-01
 slug: authenticlash
 link: https://www.github.com/shtian/authenticlash
 tags:
-- SvelteKit
-- Supabase
-- Game
+  - SvelteKit
+  - Supabase
+  - Game
 ---
 
 # Authenticlash
