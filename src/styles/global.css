@@ -6,10 +6,10 @@
 
 @theme {
   --color-text: hsl(var(--foreground));
+  --color-foreground: hsl(var(--foreground));
   --color-background: hsl(var(--background));
   --color-primary: hsl(var(--primary));
   --color-secondary: hsl(var(--secondary));
-  --color-accent: hsl(var(--accent));
 
   --font-sans: "Lato", system-ui, sans-serif;
   --font-caveat: "Caveat", ui-serif, serif;
@@ -32,15 +32,13 @@
     --foreground: 254 74% 9%;
     --background: 251 73% 97%;
     --primary: 257 76% 29%;
-    --secondary: 331 74% 70%;
-    --accent: 353 74% 43%;
+    --secondary: 257 76% 71%;
   }
   .dark {
     --foreground: 254 74% 91%;
-    --background: 251 73% 3%;
-    --primary: 257 76% 71%;
-    --secondary: 331 74% 30%;
-    --accent: 353 74% 57%;
+    --background: 251 5% 8%;
+    --primary: 251 73% 97%;
+    --secondary: 257 76% 71%;
   }
 },
 
