@@ -1,75 +1,71 @@
 <div id="tsparticles"></div>
 <script>
   import { tsParticles } from "@tsparticles/engine";
-  import { loadFull } from "tsparticles";
-  import { loadStarsPreset } from "@tsparticles/preset-stars";
+  import { loadSlim } from "@tsparticles/slim";
 
-  (async () => {
-    await loadFull(tsParticles);
-    await loadStarsPreset(tsParticles);
+  await loadSlim(tsParticles);
 
-    await tsParticles.load({
-      id: "tsparticles",
-      options: {
-        background: {
-          color: "hsl(251 5% 8%)",
-        },
-        style: {
-          opacity: "0.5",
-        },
-        fullScreen: {
-          zIndex: -50,
-        },
-        particles: {
-          number: {
-            value: 160,
-            density: {
-              enable: true,
-              value_area: 800,
-            },
-          },
-          color: {
-            value: "hsl(254 74% 91%)",
-          },
-          shape: {
-            type: "circle",
-          },
-          opacity: {
-            value: { min: 0.4, max: 1 },
-            random: true,
-            animation: {
-              enable: true,
-              speed: 0.5,
-              opacity_min: 0.4,
-              sync: false,
-            },
-          },
-          size: {
-            value: { min: 0.8, max: 1.5 },
-            random: true,
-          },
-          move: {
+  await tsParticles.load({
+    id: "tsparticles",
+    options: {
+      background: {
+        color: "hsl(251 5% 8%)",
+      },
+      style: {
+        opacity: "0.5",
+      },
+      fullScreen: {
+        zIndex: -50,
+      },
+      particles: {
+        number: {
+          value: 160,
+          density: {
             enable: true,
-            speed: 0.3,
-            direction: "left",
-            random: true,
-            straight: true,
-            out_mode: "out",
-            bounce: false,
-            attract: {
-              enable: false,
-              rotateX: 600,
-              rotateY: 600,
-            },
+            value_area: 800,
+          },
+        },
+        color: {
+          value: "hsl(254 74% 91%)",
+        },
+        shape: {
+          type: "circle",
+        },
+        opacity: {
+          value: { min: 0.4, max: 1 },
+          random: true,
+          animation: {
+            enable: true,
+            speed: 0.5,
+            opacity_min: 0.4,
+            sync: false,
+          },
+        },
+        size: {
+          value: { min: 0.8, max: 1.5 },
+          random: true,
+        },
+        move: {
+          enable: true,
+          speed: 0.3,
+          direction: "left",
+          random: true,
+          straight: true,
+          out_mode: "out",
+          bounce: false,
+          attract: {
+            enable: false,
+            rotateX: 600,
+            rotateY: 600,
           },
         },
       },
-    });
-  })();
+    },
+  });
 </script>
 
 <div
-  class="fixed bottom-0 left-2/3 -translate-x-1/2 -translate-y-8 size-96 rounded-full bg-slate-700 shadow-[0_0_100px_1px_hsl(var(--primary)/0.1)] overflow-hidden"
+  class="-z-index-8 fixed bottom-0 left-2/3 -translate-x-1/2 -translate-y-8 size-96 rounded-full bg-slate-700 shadow-[0_0_100px_1px_hsl(var(--primary)/0.1)] overflow-hidden"
 >
   <div
     class="absolute inset-0 rounded-full bg-background/90 shadow-[0_0_100px_50px_hsl(var(--background))] -translate-x-8 -translate-y-8"
