@@ -5,11 +5,10 @@
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-text: hsl(var(--foreground));
-  --color-foreground: hsl(var(--foreground));
-  --color-background: hsl(var(--background));
-  --color-primary: hsl(var(--primary));
-  --color-secondary: hsl(var(--secondary));
+  --color-text: oklch(var(--foreground));
+  --color-foreground: oklch(var(--foreground));
+  --color-background: oklch(var(--background));
+  --color-primary: oklch(var(--primary));
 
   --font-sans: "Lato", system-ui, sans-serif;
   --font-caveat: "Caveat", ui-serif, serif;
@@ -29,16 +28,13 @@
 
 @layer base {
   :root {
-    --foreground: 254 74% 9%;
-    --background: 251 73% 97%;
-    --primary: 257 76% 29%;
-    --secondary: 257 76% 71%;
+    --foreground: 30% 0.02 296; /* Darker text */
+    --background: 98% 0.01 294; /* Light background */
+    --primary: 60% 0.06 292; /* A bit more saturated accent */
   }
   .dark {
-    --foreground: 254 74% 91%;
-    --background: 251 5% 8%;
-    --primary: 251 73% 97%;
-    --secondary: 257 76% 71%;
+    --foreground: 93.91% 0.0097 296.89;
+    --background: 18.98% 0.0041 294.42;
+    --primary: 28.72% 0.0462 291.63;
   }
-},
-
+}

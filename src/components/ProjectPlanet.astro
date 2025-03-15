@@ -9,11 +9,11 @@ const { project } = Astro.props;
 ---
 
 <div
-  class="relative rounded-md p-4 flex flex-col gap-8 hover:bg-primary/5 transition-colors"
+  class="relative rounded-md p-4 flex flex-col gap-8 hover:bg-primary/5 transition-colors backdrop-blur-lg shadow-[inset_0px_0px_4px_oklch(var(--foreground)/0.1)]"
 >
   <a class="grid place-items-center" href={`/projects/${project.id}`}
     ><img
-      class="size-40 rounded-full max-w-full h-full aspect-square"
+      class="size-40 rounded-sm max-w-full h-full aspect-square"
       src={project.data.cover.src}
       height={project.data.cover.height}
       width={project.data.cover.width}
@@ -23,10 +23,10 @@ const { project } = Astro.props;
     {project.data.name}
   </p>
   <p class="text-sm text-center">{project.data.description}</p>
-  <div class="flex gap-1 flex-wrap justify-center">
+  <div class="flex gap-1 flex-wrap justify-center mt-auto">
     {
       project.data.tags.map((tag) => (
-        <span class="bg-primary/20 rounded-md px-2 py-1 text-xs">{tag}</span>
+        <span class="bg-primary rounded-md px-2 py-1 text-xs">{tag}</span>
       ))
     }
   </div>

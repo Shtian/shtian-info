@@ -5,7 +5,7 @@ import ProjectPlanet from "./ProjectPlanet.astro";
 const projects = await getCollection("projects");
 ---
 
-<section class="grid gap-2 planet-grid-columns">
+<section class="grid gap-8 md:gap-8 planet-grid-columns">
   {projects.map((project) => <ProjectPlanet project={project} />)}
 </section>
 

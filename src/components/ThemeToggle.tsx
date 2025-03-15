@@ -21,7 +21,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setDarkMode(!darkMode)}
-      className="p-2 rounded-full bg-secondary text-foreground"
+      className="p-2 rounded-full bg-primary text-foreground"
     >
       {darkMode ? (
         <svg
