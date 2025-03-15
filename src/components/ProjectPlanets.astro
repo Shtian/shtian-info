@@ -2,7 +2,9 @@
 import { getCollection } from "astro:content";
 import ProjectPlanet from "./ProjectPlanet.astro";
 
-const projects = await getCollection("projects");
+const projects = (await getCollection("projects")).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name),
+);
 ---
 
 <section class="grid gap-8 md:gap-8 planet-grid-columns">

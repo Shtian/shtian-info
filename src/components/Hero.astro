@@ -4,7 +4,6 @@ import { Image } from "astro:assets";
 
 <section class="prose text-foreground flex items-center gap-8">
   <div>
-    <h1 class="text-3xl text-foreground">Greetings, Spacefarer!</h1>
     <Image
       src={import("../assets/profile-pic.webp")}
       alt="Stian"
@@ -13,6 +12,7 @@ import { Image } from "astro:assets";
       height={128}
       loading="eager"
     />
+    <h1 class="text-3xl text-foreground">Greetings, Spacefarer!</h1>
     <p>
       I'm Stian and I love making <em
         class="font-caveat mr-1 text-lg font-bold underline underline-offset-4 decoration-2 decoration-wavy decoration-accent"
