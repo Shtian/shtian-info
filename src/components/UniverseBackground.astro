@@ -10,17 +10,15 @@
   await tsParticles.load({
     id: "stars",
     options: {
+      style: {
+        opacity: "0.4",
+      },
       fullScreen: {
         zIndex: -50,
       },
       particles: {
         number: {
-          value: 100,
-          density: {
-            enable: true,
-            height: window.innerHeight,
-            width: window.innerWidth,
-          },
+          value: 80,
         },
         shape: {
           type: "circle",
