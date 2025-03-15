@@ -11,15 +11,34 @@ const { project } = Astro.props;
 
 <a
   href={`/projects/${project.id}`}
-  class="relative rounded-md px-4 py-8 flex flex-col gap-8 hover:bg-primary/1 transition-colors backdrop-blur-lg shadow-[inset_0px_0px_4px_oklch(var(--foreground)/0.1)] before:absolute before:inset-0 before:rounded-md before:bg-gradient-to-br before:from-white/0 hover:before:from-white/5 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300"
+  class="relative rounded-md px-4 py-8 flex flex-col gap-8 hover:bg-primary/1 transition-colors backdrop-blur-lg shadow-[inset_0px_0px_4px_oklch(var(--foreground)/0.1)] before:absolute before:inset-0 before:rounded-md before:bg-gradient-to-br before:from-white/0 hover:before:from-white/5 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 group"
 >
-  <div class="grid place-items-center">
-    <Image
-      class="size-40 rounded-sm max-w-full h-full aspect-square"
-      src={project.data.cover}
-      alt={project.data.name}
-      loading="eager"
-    />
+  <div class="relative w-40 h-40 mx-auto group">
+    <div
+      class="absolute inset-0 rounded-full transition-transform group-hover:scale-110"
+    >
+      <Image
+        class="rounded-full object-cover size-40 grayscale group-hover:grayscale-0 transition-grayscale duration-300"
+        src={project.data.cover}
+        alt={project.data.name}
+        loading="eager"
+      />
+    </div>
+    <div class="absolute inset-0 rounded-full">
+      <div
+        class="absolute -inset-0 transition-[inset_opacity_outline-color] duration-300 group-hover:-inset-6 group-hover:outline-foreground/10 delay-300 rounded-full outline-2 outline-dashed outline-transparent"
+      >
+      </div>
+      <div
+        class="absolute -inset-6 rounded-full animate-orbit opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-[600ms]"
+        style={`--orbit-start: ${Math.floor(Math.random() * 360)}deg`}
+      >
+        <div
+          class="absolute w-4 h-4 bg-radial-[at_25%_25%] from-accent to-amber-500/80 to-75% rounded-full left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 shadow-md"
+        >
+        </div>
+      </div>
+    </div>
   </div>
   <p class="text-lg text-center">
     {project.data.name}
@@ -33,3 +52,18 @@ const { project } = Astro.props;
     }
   </div>
 </a>
+
+<style>
+  @keyframes orbit {
+    from {
+      transform: rotate(var(--orbit-start, 0deg));
+    }
+    to {
+      transform: rotate(calc(var(--orbit-start, 0deg) + 360deg));
+    }
+  }
+
+  .animate-orbit {
+    animation: orbit 24s linear infinite;
+  }
+</style>
