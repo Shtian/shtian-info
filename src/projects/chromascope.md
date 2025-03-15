@@ -12,8 +12,6 @@ tags:
   - ImageSharp
 ---
 
-# ChromaScope
-
 I wanted an easy way to do a visual diff on elements/pages across the most used browser engines: chromium, gecko, webkit. To build this I created a CLI with NodeJS, Playwright to control different headless browsers and screenshot, then ImageSharp to pixel-diff each screenshot.
 
 The package is published on npm and can easily be called with npx without having to globally install the package.

@@ -10,6 +10,4 @@ tags:
   - Astro
 ---
 
-# shtian.info
-
 This website! Built with Astro.

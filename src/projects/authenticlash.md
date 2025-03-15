@@ -12,6 +12,4 @@ tags:
   - OpenAI
 ---
 
-# Authenticlash
-
 This is one project

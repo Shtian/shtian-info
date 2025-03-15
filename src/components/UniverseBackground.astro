@@ -1,5 +1,6 @@
-<div id="stars"></div>
-<div id="shooting-stars"></div>
+<div id="stars" transition:persist transition:name="stars"></div>
+<div id="shooting-stars" transition:persist transition:name="shooting-stars">
+</div>
 <script>
   import { tsParticles } from "@tsparticles/engine";
   import { loadSlim } from "@tsparticles/slim";
@@ -92,25 +93,3 @@
     },
   });
 </script>
-
-<div
-  class="-z-index-8 fixed bottom-0 left-2/3 -translate-x-1/2 -translate-y-8 size-96 rounded-full bg-stone-600 shadow-[0_0_100px_1px_oklch(var(--foreground)/0.1)] overflow-hidden"
->
-  <div
-    class="absolute size-16 bottom-16 right-17 rounded-full bg-stone-600/50 shadow-[inset_0_0_16px_rgba(0,0,0,0.4)]"
-  >
-  </div>
-
-  <div
-    class="absolute size-8 bottom-48 -right-2 rounded-full bg-stone-600/50 shadow-[inset_0_0_8px_rgba(0,0,0,0.3)] rotate-y-[297deg]"
-  >
-  </div>
-
-  <div class="absolute size-16 -bottom-8 right-64 rounded-full bg-stone-600/50">
-  </div>
-
-  <div
-    class="absolute inset-0 rounded-full bg-background shadow-[0_0_100px_60px_oklch(var(--background))] -translate-x-12 -translate-y-12"
-  >
-  </div>
-</div>

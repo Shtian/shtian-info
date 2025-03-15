@@ -1,0 +1,72 @@
+---
+import { fade } from "astro:transitions";
+
+interface Props {
+  size?: "sm" | "md" | "lg";
+}
+
+const { size = "md" } = Astro.props as Props;
+---
+
+<div
+  transition:name="background-planet"
+  class:list={[
+    "-z-index-8 fixed bottom-0 left-2/3 -translate-x-1/2 -translate-y-8 rounded-full bg-stone-600 shadow-[0_0_100px_1px_oklch(var(--foreground)/0.1)] overflow-hidden",
+    {
+      "size-80": size === "sm",
+      "size-96": size === "md",
+      "size-[28rem]": size === "lg",
+    },
+  ]}
+>
+  <div
+    class:list={[
+      "absolute rounded-full bg-stone-600/50 shadow-[inset_0_0_16px_rgba(0,0,0,0.4)]",
+      {
+        "size-12 bottom-12 right-14": size === "sm",
+        "size-16 bottom-16 right-17": size === "md",
+        "size-20 bottom-20 right-20": size === "lg",
+      },
+    ]}
+  >
+  </div>
+
+  <div
+    class:list={[
+      "absolute rounded-full bg-stone-600/50 shadow-[inset_0_0_8px_rgba(0,0,0,0.3)] rotate-y-[297deg]",
+      {
+        "size-6 bottom-40 -right-1": size === "sm",
+        "size-8 bottom-48 -right-2": size === "md",
+        "size-10 bottom-56 -right-3": size === "lg",
+      },
+    ]}
+  >
+  </div>
+
+  <div
+    class:list={[
+      "absolute rounded-full bg-stone-600/50",
+      {
+        "size-12 -bottom-6 right-52": size === "sm",
+        "size-16 -bottom-8 right-64": size === "md",
+        "size-20 -bottom-10 right-80": size === "lg",
+      },
+    ]}
+  >
+  </div>
+
+  <div
+    class:list={[
+      "absolute inset-0 rounded-full bg-background",
+      {
+        "shadow-[0_0_80px_48px_oklch(var(--background))] -translate-x-10 -translate-y-10":
+          size === "sm",
+        "shadow-[0_0_100px_60px_oklch(var(--background))] -translate-x-12 -translate-y-12":
+          size === "md",
+        "shadow-[0_0_120px_72px_oklch(var(--background))] -translate-x-14 -translate-y-14":
+          size === "lg",
+      },
+    ]}
+  >
+  </div>
+</div>

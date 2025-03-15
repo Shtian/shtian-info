@@ -22,6 +22,7 @@ const { project } = Astro.props;
         src={project.data.cover}
         alt={project.data.name}
         loading="eager"
+        transition:name={`project-image-${project.id}`}
       />
     </div>
     <div class="absolute inset-0 rounded-full">
@@ -40,9 +41,12 @@ const { project } = Astro.props;
       </div>
     </div>
   </div>
-  <p class="text-lg text-center">
+  <h3
+    class="text-lg text-center"
+    transition:name={`project-title-${project.id}`}
+  >
     {project.data.name}
-  </p>
+  </h3>
   <p class="text-sm text-center">{project.data.description}</p>
   <div class="flex gap-1 flex-wrap justify-center mt-auto">
     {
