@@ -9,17 +9,18 @@ interface Props {
 const { project } = Astro.props;
 ---
 
-<div
-  class="relative rounded-md px-4 py-8 flex flex-col gap-8 hover:bg-primary/1 transition-colors backdrop-blur-lg shadow-[inset_0px_0px_4px_oklch(var(--foreground)/0.1)]"
+<a
+  href={`/projects/${project.id}`}
+  class="relative rounded-md px-4 py-8 flex flex-col gap-8 hover:bg-primary/1 transition-colors backdrop-blur-lg shadow-[inset_0px_0px_4px_oklch(var(--foreground)/0.1)] before:absolute before:inset-0 before:rounded-md before:bg-gradient-to-br before:from-white/0 hover:before:from-white/5 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300"
 >
-  <a class="grid place-items-center" href={`/projects/${project.id}`}
-    ><Image
+  <div class="grid place-items-center">
+    <Image
       class="size-40 rounded-sm max-w-full h-full aspect-square"
       src={project.data.cover}
       alt={project.data.name}
       loading="eager"
-    /></a
-  >
+    />
+  </div>
   <p class="text-lg text-center">
     {project.data.name}
   </p>
@@ -31,4 +32,4 @@ const { project } = Astro.props;
       ))
     }
   </div>
-</div>
+</a>
