@@ -23,3 +23,5 @@ Players can generate a game which lasts for a set period of time. They can also 
 To add some more strategic and fun elements, players can now choose their class as they enter the game. There are a number of classes and each class has different active/passive skills.
 
 Players can also see their global stats, as well as earn achievements (integral part of any game, as we can all agree).
+
+Visit [www.authenticlash.app](www.authenticlash.app) to check it out 👀
