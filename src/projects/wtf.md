@@ -12,7 +12,7 @@ tags:
   - CLI
 ---
 
-When an alert pops up in our monitoring channel, figuring out its source can be a hassle. _Where's the Fault (WTF)?_ is a terminal-based assistant designed to help dev teams trace the origin of an issue through an interactive, structured workflow.
+When an alert pops up in your monitoring channel, figuring out its source can be a hassle. Maybe someone is new to the team? Maybe you just forgot the correct procedure to follow during an incident? _Where's the Fault (WTF)?_ is a terminal-based assistant designed to help dev teams trace the origin of an issue through an interactive, structured workflow.
 
 Built with Svelte, it provides a streamlined way to navigate through possible causes and solutions.
 
