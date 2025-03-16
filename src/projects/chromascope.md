@@ -12,11 +12,11 @@ tags:
   - ImageSharp
 ---
 
-I wanted an easy way to do a visual diff on elements/pages across the most used browser engines: chromium, gecko, webkit. To build this I created a CLI with NodeJS, Playwright to control different headless browsers and screenshot, then ImageSharp to pixel-diff each screenshot.
+I wanted an easy way to perform a visual diff on elements/pages across the most widely used browser engines: Chromium, Gecko, and WebKit. To achieve this, I built a CLI using Node.js, Playwright (to control headless browsers and capture screenshots), and ImageSharp (to compute pixel differences between screenshots).
 
-The package is published on npm and can easily be called with npx without having to globally install the package.
+The package is published on npm and can be run with `npx` or equivalent for your package manager of choice, eliminating the need for a global installation.
 
-Sample output:
+### Sample Output:
 
 ```bash
 > pnpm dlx chromascope shtian.info
@@ -25,12 +25,12 @@ Sample output:
 ✔ Captured Firefox screenshot 📸
 ✔ Diff complete 🎉
 ┌─ 🍎 WebKit
-└─ 👉 3.50% pixel change compared to Chromium (32271px)
+└─ 👉 3.50% pixel change compared to Chromium (32,271px)
 ┌─ 🦊 Firefox
-└─ 👉 0.43% pixel change compared to Chromium (4001px)
+└─ 👉 0.43% pixel change compared to Chromium (4,001px)
 ```
 
-It has quite a list of options to customize and support different scenarios, one of them is diffing a certain element on a page based on a selector:
+ChromaScope includes various options to customize its behavior for different scenarios. For instance, you can diff a specific element on a page using a selector:
 
 ```bash
 > pnpm dlx chromascope diff shtian.info -e footer
