@@ -11,7 +11,7 @@ const { size = "md" } = Astro.props as Props;
 <div
   transition:name="background-planet"
   class:list={[
-    "-z-index-8 fixed bottom-0 left-2/3 -translate-x-1/2 -translate-y-8 rounded-full bg-stone-600 shadow-[0_0_100px_1px_oklch(var(--foreground)/0.1)] overflow-hidden",
+    "-z-index-8 fixed bottom-0 left-2/3 -translate-x-1/2 -translate-y-8 rounded-full bg-sky-950 saturate-[40%] shadow-[0_0_100px_1px_oklch(var(--foreground)/0.1)] overflow-hidden",
     {
       "size-80": size === "sm",
       "size-96": size === "md",
@@ -21,7 +21,7 @@ const { size = "md" } = Astro.props as Props;
 >
   <div
     class:list={[
-      "absolute rounded-full bg-stone-600/50 shadow-[inset_0_0_16px_rgba(0,0,0,0.4)]",
+      "absolute rounded-full bg-sky-950/50 shadow-[inset_0_0_16px_rgba(0,0,0,0.4)]",
       {
         "size-12 bottom-12 right-14": size === "sm",
         "size-16 bottom-16 right-17": size === "md",
@@ -33,7 +33,7 @@ const { size = "md" } = Astro.props as Props;
 
   <div
     class:list={[
-      "absolute rounded-full bg-stone-600/50 shadow-[inset_0_0_8px_rgba(0,0,0,0.3)] rotate-y-[297deg]",
+      "absolute rounded-full bg-sky-950/50 shadow-[inset_0_0_8px_rgba(0,0,0,0.3)] rotate-y-[297deg]",
       {
         "size-6 bottom-40 -right-1": size === "sm",
         "size-8 bottom-48 -right-2": size === "md",
@@ -45,7 +45,7 @@ const { size = "md" } = Astro.props as Props;
 
   <div
     class:list={[
-      "absolute rounded-full bg-stone-600/50",
+      "absolute rounded-full bg-sky-950/50",
       {
         "size-12 -bottom-6 right-52": size === "sm",
         "size-16 -bottom-8 right-64": size === "md",
