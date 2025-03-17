@@ -11,7 +11,7 @@ export async function GET() {
         .map(
           (page) => `
         <url>
-          <loc>https://shtian.info${page}</loc>
+          <loc>https://www.shtian.info${page}</loc>
           <changefreq>monthly</changefreq>
         </url>
       `,
@@ -21,7 +21,7 @@ export async function GET() {
         .map(
           (project) => `
         <url>
-          <loc>https://shtian.info/projects/${project.id}</loc>
+          <loc>https://www.shtian.info/projects/${project.id}</loc>
           <lastmod>${project.data.date.toISOString()}</lastmod>
           <changefreq>monthly</changefreq>
         </url>
