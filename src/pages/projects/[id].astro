@@ -57,19 +57,20 @@ const { Content } = await render(project);
   </Prose>
 </ProjectPageLayout>
 
-<script type="application/ld+json">
-  {
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
     "@context": "https://schema.org",
-    "@type": "Project",
-    "name": {project.data.name},
-    "description": {project.data.description},
-    "author": {
+    "@type": "CreativeWork",
+    name: project.data.name,
+    description: project.data.description,
+    author: {
       "@type": "Person",
-      "name": "Stian Haga",
-      "url": "https://shtian.info"
+      name: "Stian Haga",
+      url: "https://www.shtian.info",
     },
-    "datePublished": {project.data.date.toISOString()},
-    "image": {project.data.cover},
-    "url": {project.data.link}
-  }
-</script>
+    datePublished: project.data.date.toISOString(),
+    image: project.data.cover,
+    url: project.data.link,
+  })}
+/>
