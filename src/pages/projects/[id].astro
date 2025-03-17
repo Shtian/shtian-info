@@ -56,3 +56,20 @@ const { Content } = await render(project);
     <Content />
   </Prose>
 </ProjectPageLayout>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Project",
+    "name": {project.data.name},
+    "description": {project.data.description},
+    "author": {
+      "@type": "Person",
+      "name": "Stian Haga",
+      "url": "https://shtian.info"
+    },
+    "datePublished": {project.data.date.toISOString()},
+    "image": {project.data.cover},
+    "url": {project.data.link}
+  }
+</script>
