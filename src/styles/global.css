@@ -40,4 +40,8 @@
     --primary: 55.7% 0.199 314.53;
     --accent: 81.18% 0.161 97.64;
   }
+
+  *:focus-visible {
+    @apply outline-none ring-2 ring-offset-2 ring-offset-background ring-primary;
+  }
 }
