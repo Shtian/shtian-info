@@ -49,24 +49,15 @@
   await tsParticles.load({
     id: "shooting-stars",
     options: {
-      background: {
-        color: "transparent",
-      },
-      style: {
-        opacity: "0.4",
-      },
       fullScreen: {
         zIndex: -40,
       },
       particles: {
         number: {
-          value: 2,
-          density: {
-            enable: true,
-          },
+          value: 1,
         },
         color: {
-          value: "hsl(254 74% 91%)",
+          value: "rgb(80 80 80)",
         },
         shape: {
           type: "circle",
@@ -82,7 +73,7 @@
           straight: true,
           outModes: { default: "out" },
           trail: {
-            enable: true,
+            enable: false,
             length: 5,
             fill: { color: "hsl(251 5% 8%)" },
           },
