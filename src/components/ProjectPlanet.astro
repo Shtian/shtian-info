@@ -56,13 +56,19 @@ const { project } = Astro.props;
   >
     {project.data.name}
   </h3>
-  <p class="text-sm text-center">{project.data.description}</p>
-  <div class="flex gap-1 flex-wrap justify-center mt-auto">
-    {
-      project.data.tags.map((tag) => (
-        <span class="bg-primary/50 rounded-md px-2 py-1 text-xs">{tag}</span>
-      ))
-    }
+  <div class="flex flex-col gap-4">
+    <p class="text-sm text-center min-h-[3rem]">
+      {project.data.description}
+    </p>
+    <div class="flex gap-2 flex-wrap justify-center">
+      {
+        project.data.tags.map((tag) => (
+          <span class="border border-violet-800 rounded-full px-2 py-1 text-xs">
+            {tag}
+          </span>
+        ))
+      }
+    </div>
   </div>
 </a>
 
