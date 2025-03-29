@@ -13,16 +13,37 @@ import { Image } from "astro:assets";
       toast?.classList.add("translate-y-full");
     }, 5000);
   }
+
+  // Add typewriter effect
+  document.addEventListener("DOMContentLoaded", () => {
+    const heading = document.querySelector(".typewriter");
+    const text = heading.textContent;
+    const width = heading.offsetWidth;
+    const height = heading.offsetHeight;
+    heading.style.width = `${width}px`;
+    heading.style.height = `${height}px`;
+    heading.style.color = "inherit";
+    heading.textContent = "";
+    let i = 0;
+
+    function type() {
+      if (i < text.length) {
+        heading.textContent += text.charAt(i);
+        i++;
+        setTimeout(type, 40);
+      }
+    }
+
+    type();
+  });
 </script>
 
 <section class="relative prose text-foreground mt-24 mx-auto">
-  <h1 class="text-5xl font-bold text-foreground text-center">
+  <h1 class="text-5xl w-full font-bold text-transparent typewriter relative">
     Greetings, Spacefarer!
   </h1>
 
-  <div
-    class="flex flex-col-reverse sm:flex-row items-center sm:gap-12 sm:mt-12"
-  >
+  <div class="flex flex-col-reverse sm:flex-row items-center sm:gap-12">
     <div class="flex-1">
       <p>
         I'm Stian, and I love building<em
@@ -32,7 +53,7 @@ import { Image } from "astro:assets";
         on the web that not only work great, but spark delight ✨
       </p>
       <p>
-        Frontend development is my expertise, but I’ve worked across the stack
+        Frontend development is my expertise, but I've worked across the stack
         for the past 15 years — backend, cloud infrastructure, monitoring, even
         team leadership. Here are some of my spare time projects — feel free to
         explore!
@@ -126,9 +147,26 @@ import { Image } from "astro:assets";
       src={import("../assets/profile-pic.webp")}
       alt="Stian"
       class="flex-shrink-0 rounded-full size-24 sm:size-48 object-cover z-10 relative border-2 border-primary/50"
-      width={192}
-      height={192}
+      width={400}
+      height={400}
       loading="eager"
     />
   </div>
 </section>
+
+<style>
+  @keyframes cursor {
+    50% {
+      border-color: transparent;
+    }
+  }
+
+  .typewriter {
+    display: inline-block;
+    line-height: 1.2; /* Ensure consistent line height */
+  }
+
+  .animate-cursor {
+    animation: cursor 1s step-end infinite;
+  }
+</style>
