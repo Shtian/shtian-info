@@ -7,16 +7,39 @@ const projects = (await getCollection("projects")).sort((a, b) =>
 );
 ---
 
-<section class="grid gap-8 md:gap-8 planet-grid-columns">
+<section
+  class="grid gap-8 md:gap-8 grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))]"
+>
   {projects.map((project) => <ProjectPlanet project={project} />)}
 </section>
 
-<style>
-  .planet-grid-columns {
-    --min-size: 280px;
-    grid-template-columns: repeat(
-      var(--grid-type, auto-fit),
-      minmax(min(var(--min-size), 100%), 1fr)
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const cardElement = entry.target.closest(
+            "[data-selector='planet-wrapper']",
+          );
+          if (!cardElement) return;
+
+          if (entry.isIntersecting) {
+            cardElement.setAttribute("data-active", "");
+          } else {
+            cardElement.removeAttribute("data-active");
+          }
+        }
+      },
+      {
+        threshold: 0.5,
+      },
     );
-  }
-</style>
+
+    const planetElements = document.querySelectorAll(
+      '[data-selector="planet"]',
+    );
+    for (const element of planetElements) {
+      observer.observe(element);
+    }
+  });
+</script>

@@ -11,9 +11,10 @@ const { project } = Astro.props;
 
 <a
   href={`/projects/${project.id}`}
-  class="relative rounded-md px-4 py-8 flex flex-col gap-8 hover:bg-primary/1 transition-colors backdrop-blur-lg shadow-[inset_0px_0px_4px_oklch(var(--foreground)/0.1)] before:absolute before:inset-0 before:rounded-md before:bg-gradient-to-br before:from-white/0 hover:before:from-white/5 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 group active-orbit"
+  class="relative rounded-md px-4 py-8 flex flex-col gap-8 hover:bg-primary/1 transition-colors backdrop-blur-lg shadow-[inset_0px_0px_4px_oklch(var(--foreground)/0.1)] before:absolute before:inset-0 before:rounded-md before:bg-gradient-to-br before:from-white/0 hover:before:from-white/5 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 group"
+  data-selector="planet-wrapper"
 >
-  <div class="relative w-40 h-40 mx-auto">
+  <div class="relative w-40 h-40 mx-auto" data-selector="planet">
     <div
       class="absolute inset-0 rounded-full transition-transform group-hover:scale-105 group-data-[active]:scale-105"
     >
