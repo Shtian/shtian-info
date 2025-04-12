@@ -15,6 +15,11 @@ const projects = (await getCollection("projects")).sort((a, b) =>
 
 <script>
   document.addEventListener("astro:page-load", () => {
+    // Only trigger planet intersection animation on touch devices
+    if (window.matchMedia("(pointer: fine)").matches) {
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
