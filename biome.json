@@ -6,7 +6,8 @@
     "useIgnoreFile": true
   },
   "files": {
-    "ignoreUnknown": false
+    "ignoreUnknown": false,
+    "includes": ["**", "!src/styles/global.css"]
   },
   "formatter": {
     "enabled": true,
@@ -31,6 +32,11 @@
       }
     }
   },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
   "javascript": {
     "formatter": {
       "quoteStyle": "double",
@@ -38,6 +44,14 @@
       "semicolons": "always"
     }
   },
+  "overrides": [
+    {
+      "includes": ["src/components/PostHog.astro"],
+      "linter": {
+        "enabled": false
+      }
+    }
+  ],
   "html": {
     "experimentalFullSupportEnabled": true,
     "formatter": {

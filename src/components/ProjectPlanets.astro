@@ -3,48 +3,46 @@ import { getCollection } from "astro:content";
 import ProjectPlanet from "./ProjectPlanet.astro";
 
 const projects = (await getCollection("projects")).sort((a, b) =>
-  a.data.name.localeCompare(b.data.name),
+  a.data.name.localeCompare(b.data.name)
 );
 ---
 
 <section
   class="grid gap-8 md:gap-8 grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))]"
 >
-  {projects.map((project) => <ProjectPlanet project={project} />)}
+  {projects.map((project) => <ProjectPlanet key={project.id} project={project} />)}
 </section>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
-    // Only trigger planet intersection animation on touch devices
-    if (window.matchMedia("(pointer: fine)").matches) {
-      return;
-    }
+document.addEventListener("astro:page-load", () => {
+  // Only trigger planet intersection animation on touch devices
+  if (window.matchMedia("(pointer: fine)").matches) {
+    return;
+  }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          const cardElement = entry.target.closest(
-            "[data-selector='planet-wrapper']",
-          );
-          if (!cardElement) return;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        const cardElement = entry.target.closest(
+          "[data-selector='planet-wrapper']"
+        );
+        if (!cardElement) return;
 
-          if (entry.isIntersecting) {
-            cardElement.setAttribute("data-active", "");
-          } else {
-            cardElement.removeAttribute("data-active");
-          }
+        if (entry.isIntersecting) {
+          cardElement.setAttribute("data-active", "");
+        } else {
+          cardElement.removeAttribute("data-active");
         }
-      },
-      {
-        threshold: 0.5,
-      },
-    );
-
-    const planetElements = document.querySelectorAll(
-      '[data-selector="planet"]',
-    );
-    for (const element of planetElements) {
-      observer.observe(element);
+      }
+    },
+    {
+      threshold: 0.5,
     }
-  });
+  );
+
+  const planetElements = document.querySelectorAll('[data-selector="planet"]');
+  for (const element of planetElements) {
+    observer.observe(element);
+  }
+});
 </script>

@@ -2,7 +2,9 @@
 @import "tailwindcss";
 @plugin '@tailwindcss/typography';
 
-@variant dark (&:where(.dark, .dark *));
+@variant dark
+(
+&:where(.dark, .dark *));
 
 @theme {
   --color-text: oklch(var(--foreground));
