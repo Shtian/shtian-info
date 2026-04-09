@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
   const [darkMode, setDarkMode] = useState(true);
@@ -20,6 +20,7 @@ export default function ThemeToggle() {
 
   return (
     <button
+      type="button"
       onClick={() => setDarkMode(!darkMode)}
       className="p-2 rounded-full bg-primary text-foreground"
     >
@@ -35,6 +36,7 @@ export default function ThemeToggle() {
           strokeLinecap="round"
           strokeLinejoin="round"
           className="lucide lucide-sun"
+          aria-hidden={true}
         >
           <circle cx="12" cy="12" r="4" />
           <path d="M12 2v2" />
@@ -58,6 +60,7 @@ export default function ThemeToggle() {
           strokeLinecap="round"
           strokeLinejoin="round"
           className="lucide lucide-moon"
+          aria-hidden={true}
         >
           <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
         </svg>

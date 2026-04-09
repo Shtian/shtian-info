@@ -29,8 +29,7 @@ const { project } = Astro.props;
     <div class="absolute inset-0 rounded-full">
       <div
         class="absolute -inset-0 transition-[inset_opacity_outline-color] duration-300 group-hover:-inset-4 group-data-[active]:-inset-4 group-hover:outline-foreground/10 group-data-[active]:outline-foreground/10 delay-300 rounded-full outline-2 outline-dashed outline-transparent"
-      >
-      </div>
+      ></div>
       <div
         class="absolute -inset-4 rounded-full animate-orbit opacity-0 group-hover:opacity-100 group-data-[active]:opacity-100 transition-opacity duration-300 delay-[600ms]"
         style={`--orbit-start: ${Math.floor(Math.random() * 360)}deg`}
@@ -46,8 +45,7 @@ const { project } = Astro.props;
               "from-stone-400 to-stone-600/80",
             ][Math.floor(Math.random() * 5)],
           ]}
-        >
-        </div>
+        ></div>
       </div>
     </div>
   </div>
@@ -58,32 +56,28 @@ const { project } = Astro.props;
     {project.data.name}
   </h3>
   <div class="flex flex-col gap-4">
-    <p class="text-sm text-center min-h-[3rem]">
-      {project.data.description}
-    </p>
+    <p class="text-sm text-center min-h-[3rem]">{project.data.description}</p>
     <div class="flex gap-2 flex-wrap justify-center">
-      {
-        project.data.tags.map((tag) => (
-          <span class="border border-primary rounded-full px-2 py-1 text-xs">
+      {project.data.tags.map((tag) => (
+          <span key={tag} class="border border-primary rounded-full px-2 py-1 text-xs">
             {tag}
           </span>
-        ))
-      }
+        ))}
     </div>
   </div>
 </a>
 
 <style>
-  @keyframes orbit {
-    from {
-      transform: rotate(var(--orbit-start, 0deg));
-    }
-    to {
-      transform: rotate(calc(var(--orbit-start, 0deg) + 360deg));
-    }
+@keyframes orbit {
+  from {
+    transform: rotate(var(--orbit-start, 0deg));
   }
+  to {
+    transform: rotate(calc(var(--orbit-start, 0deg) + 360deg));
+  }
+}
 
-  .animate-orbit {
-    animation: orbit 24s linear infinite;
-  }
+.animate-orbit {
+  animation: orbit 24s linear infinite;
+}
 </style>

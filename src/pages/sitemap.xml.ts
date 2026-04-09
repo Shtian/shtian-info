@@ -14,7 +14,7 @@ export async function GET() {
           <loc>https://www.shtian.info${page}</loc>
           <changefreq>monthly</changefreq>
         </url>
-      `,
+      `
         )
         .join("")}
       ${projects
@@ -25,7 +25,7 @@ export async function GET() {
           <lastmod>${project.data.date.toISOString()}</lastmod>
           <changefreq>monthly</changefreq>
         </url>
-      `,
+      `
         )
         .join("")}
     </urlset>`,
@@ -33,6 +33,6 @@ export async function GET() {
       headers: {
         "Content-Type": "application/xml",
       },
-    },
+    }
   );
 }
