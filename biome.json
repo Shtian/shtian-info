@@ -46,6 +46,16 @@
   },
   "overrides": [
     {
+      "includes": ["**/*.astro"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "useJsxKeyInIterable": "off"
+          }
+        }
+      }
+    },
+    {
       "includes": ["src/components/PostHog.astro"],
       "linter": {
         "enabled": false
