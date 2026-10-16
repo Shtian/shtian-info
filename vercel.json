@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/projects",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/ingest/static/:path(.*)",
