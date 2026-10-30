@@ -22,6 +22,8 @@ const PARALLAX_EASE = 0.05;
 const DIM_EASE = 0.06;
 // Star density multiplier; 1 is the shader's full density.
 const STAR_DENSITY = 0.35;
+// Load-in length. The shader paces each layer within it.
+const INTRO_MS = 2200;
 
 function normalize(v: number[]) {
   const l = Math.hypot(...v);
@@ -108,6 +110,7 @@ export function mountSpaceBackground(canvas: HTMLCanvasElement) {
         "uStars",
         "uQuiet[0]",
         "uQuietCount",
+        "uIntro",
       ].map((name) => [name, gl.getUniformLocation(program, name)])
     );
     gl.uniform3fv(uniforms.uLight, LIGHT);
@@ -169,13 +172,21 @@ export function mountSpaceBackground(canvas: HTMLCanvasElement) {
     gl.uniform1f(uniforms.uQuietCount, n);
   };
 
+  // Reduced motion skips the intro; CSS fades the finished frame in instead.
+  let intro = reducedMotion ? 1 : 0;
+  let introStart = -1;
+
   const draw = (time: number) => {
     gl.uniform1f(uniforms.uTime, time);
+    gl.uniform1f(uniforms.uIntro, intro);
     gl.uniform2f(uniforms.uMouse, parallax.x, parallax.y);
     gl.uniform1f(uniforms.uDim, dim);
     gl.uniform1f(uniforms.uStars, STAR_DENSITY);
     measureQuiet();
     gl.drawArrays(gl.TRIANGLES, 0, 3);
+    // The canvas stays hidden until it holds a frame, so the blank
+    // context never flashes over the page.
+    canvas.dataset.ready = "";
   };
 
   let raf = 0;
@@ -187,6 +198,10 @@ export function mountSpaceBackground(canvas: HTMLCanvasElement) {
     parallax.x += (pointer.x - parallax.x) * PARALLAX_EASE;
     parallax.y += (pointer.y - parallax.y) * PARALLAX_EASE;
     dim += (dimTarget - dim) * DIM_EASE;
+    if (intro < 1) {
+      if (introStart < 0) introStart = now;
+      intro = Math.min(1, (now - introStart) / INTRO_MS);
+    }
     draw(now / 1000);
   };
   const start = () => {
@@ -231,6 +246,7 @@ export function mountSpaceBackground(canvas: HTMLCanvasElement) {
     stop();
   });
   canvas.addEventListener("webglcontextrestored", () => {
+    intro = 1;
     if (init()) start();
   });
 }

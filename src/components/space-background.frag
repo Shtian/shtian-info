@@ -19,6 +19,7 @@ uniform float uDim;        // planet brightness, set per page for readability
 uniform float uStars;      // star density multiplier
 uniform vec4 uQuiet[4];    // text rects to keep calm: x, y, w, h in CSS px
 uniform float uQuietCount;
+uniform float uIntro;      // 0..1 progress of the load-in, 1 when settled
 
 const float PARALLAX = 0.3;
 const float TWINKLE_SHARE = 0.12;  // share of stars that blink at all
@@ -28,6 +29,7 @@ float T;      // scene time, stepped to 8fps
 float gIso;   // surface value the contour lines follow
 float gLine;  // contour line mask from the last planet() call
 float gEdge;  // signed distance to the nearest planet silhouette, CSS px
+float gRise;  // intro offset: planets settle upward into place, CSS px
 
 float hash12(vec2 p) {
   vec3 p3 = fract(vec3(p.xyx) * 0.1031);
@@ -131,7 +133,7 @@ vec3 rockSurface(vec3 n) {
 // Lit planet color at p (alpha = coverage). Sets gLine and folds the
 // silhouette distance into gEdge.
 vec4 planet(vec2 p, vec4 P, float tilt, float spin, vec3 atmo, bool giant) {
-  vec2 d = (p - P.xy) / P.z;
+  vec2 d = (p - P.xy - vec2(0.0, gRise * P.w)) / P.z;
   float l = length(d);
   gLine = 0.0;
   gEdge = min(gEdge, (l - 1.0) * P.z);
@@ -217,10 +219,24 @@ float quietAt(vec2 p) {
   return step(bayer4(floor(p / 8.0)) + 0.001, q);
 }
 
+// Intro: light arrives from the upper right. The sky dissolves in along
+// that diagonal, then the planets climb the palette ramp step by step,
+// rising a few px into place, and their contours engrave last.
+float skyIntro(vec2 p) {
+  float far = 0.5 * (1.0 - p.x / uRes.x) + 0.5 * (p.y / uRes.y);
+  return clamp((uIntro - far * 0.45) / 0.55, 0.0, 1.0);
+}
+
 void main() {
   vec2 fc = gl_FragCoord.xy;
   vec2 p = vec2(fc.x, uRes.y * uScale - fc.y) / uScale;
   T = floor(uTime * 8.0) / 8.0;
+
+  float sky = skyIntro(p);
+  float lit = clamp((uIntro - 0.2) / 0.7, 0.0, 1.0);
+  float settle = 1.0 - clamp((uIntro - 0.1) / 0.9, 0.0, 1.0);
+  gRise = settle * settle * settle * 48.0;
+  float engrave = smoothstep(0.75, 1.0, lit);
 
   float calm = quietAt(p);
   vec4 block = blockScene(p);
@@ -228,14 +244,15 @@ void main() {
   if (block.a < 0.0) {
     // Planets: chunky blocks with contours on a 4px grid. Behind text
     // they drop to the two darkest ramp steps and lose their lines.
-    o = blueRamp(tone(block.rgb, 3.4) * (1.0 - calm * 0.75), fc);
+    o = blueRamp(tone(block.rgb, 3.4) * (1.0 - calm * 0.75) * lit, fc);
     float line = scene((floor(p / 4.0) + 0.5) * 4.0).a;
-    o = mix(o, uStarlight, line * 0.7 * (1.0 - calm));
+    o = mix(o, uStarlight, line * 0.7 * (1.0 - calm) * engrave);
   } else {
     // Sky: magenta stipple nebula and stars, cleared behind text.
-    float t = tone(scene(p).rgb, 2.2) * (1.0 - calm);
+    float t = tone(scene(p).rgb, 2.2) * (1.0 - calm) * sky;
     o = mix(uVoid, uMagenta * 0.75, step(bayer8(fc) + 0.004, t));
-    o = mix(o, uStarlight, step(0.3, starsAt(p)) * (1.0 - calm));
+    float starOn = step(bayer4(floor(p / 8.0)) + 0.001, sky);
+    o = mix(o, uStarlight, step(0.3, starsAt(p)) * (1.0 - calm) * starOn);
   }
   gl_FragColor = vec4(o, 1.0);
 }
