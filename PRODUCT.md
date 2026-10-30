@@ -23,7 +23,7 @@ A frontend specialist with around 15 years across the stack (backend, cloud infr
 
 ## Operating Context
 
-- Built with Astro 6, Tailwind CSS 4, and tsParticles. Deployed on Vercel, with PostHog analytics.
+- Built with Astro 6, Tailwind CSS 4, and a hand-written WebGL shader for the background. Deployed on Vercel, with PostHog analytics.
 - Projects are an Astro content collection (`src/projects/*.md`) with name, description, tags, date, external link, and a cover image. Each project gets its own page at `/projects/[id]`.
 - Contact goes through external channels only: LinkedIn, GitHub, and copying the Discord username. The site has no contact form or backend.
 
