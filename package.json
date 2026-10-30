@@ -16,8 +16,6 @@
     "@astrojs/check": "^0.9.8",
     "@astrojs/react": "^5.0.2",
     "@tailwindcss/vite": "^4.2.2",
-    "@tsparticles/engine": "^3.8.1",
-    "@tsparticles/slim": "^3.8.1",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "astro": "^6.1.5",

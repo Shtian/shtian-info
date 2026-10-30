@@ -1,0 +1,14 @@
+<canvas
+  id="space-background"
+  aria-hidden="true"
+  transition:persist
+  transition:name="space-background"
+  class="fixed inset-0 -z-50 w-screen h-lvh pointer-events-none"
+></canvas>
+
+<script>
+import { mountSpaceBackground } from "./space-background";
+
+const canvas = document.getElementById("space-background");
+if (canvas instanceof HTMLCanvasElement) mountSpaceBackground(canvas);
+</script>
