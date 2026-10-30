@@ -2,10 +2,6 @@
 @import "tailwindcss";
 @plugin '@tailwindcss/typography';
 
-@variant dark
-(
-&:where(.dark, .dark *));
-
 @theme {
   --color-text: oklch(var(--foreground));
   --color-foreground: oklch(var(--foreground));
@@ -31,12 +27,7 @@
 
 @layer base {
   :root {
-    --foreground: 30% 0.02 296;
-    --background: 98% 0.01 294;
-    --primary: 55.7% 0.199 314.53;
-    --accent: 81.18% 0.161 97.64;
-  }
-  .dark {
+    color-scheme: dark;
     --foreground: 90% 0.004 297;
     --background: 18.98% 0 294;
     --primary: 55.7% 0.199 314.53;
