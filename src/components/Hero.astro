@@ -3,7 +3,6 @@ import { Image } from "astro:assets";
 ---
 
 <script is:inline>
-// biome-ignore lint/correctness/noUnusedVariables: called via inline onclick attribute
 function copyDiscordUsername() {
   navigator.clipboard.writeText("shtian");
   const toast = document.getElementById("discord-toast");

@@ -6,24 +6,18 @@ on:
   pull_request:
 
 jobs:
-  biome:
-    name: Biome
+  check:
+    name: Check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
-
-      - uses: actions/setup-node@v4
+      - uses: voidzero-dev/setup-vp@v1.22.0
         with:
-          node-version: "lts/*"
-          cache: "pnpm"
+          cache: true
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Lint
-        run: pnpm exec biome ci .
+      - name: Format, lint and type-aware lint
+        run: vp check
 
   typecheck:
     name: Typecheck
@@ -31,15 +25,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
-
-      - uses: actions/setup-node@v4
+      - uses: voidzero-dev/setup-vp@v1.22.0
         with:
-          node-version: "lts/*"
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+          cache: true
 
       - name: Typecheck
-        run: pnpm typecheck
+        run: vp run typecheck
