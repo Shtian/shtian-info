@@ -9,7 +9,7 @@
     "astro": "astro",
     "format": "vp fmt",
     "lint": "vp lint --fix",
-    "check": "vp check --fix",
+    "check": "astro sync && vp check --fix",
     "typecheck": "astro check"
   },
   "dependencies": {

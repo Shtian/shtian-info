@@ -16,6 +16,9 @@ jobs:
         with:
           cache: true
 
+      - name: Generate Astro types
+        run: vp exec astro sync
+
       - name: Format, lint and type-aware lint
         run: vp check
 
