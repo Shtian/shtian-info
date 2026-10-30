@@ -1,0 +1,44 @@
+---
+// PROTOTYPE — throwaway. Four background variants on the real pages,
+// picked with `?variant=canvas|shader|three|current` (sticky per tab).
+// Replaces <UniverseBackground /> + <PlanetBackground /> in SpacePageLayout
+// while the prototype is live.
+import PlanetBackground from "../PlanetBackground.astro";
+import PrototypeSwitcher from "./PrototypeSwitcher.astro";
+---
+
+<div id="bg-proto" transition:persist transition:name="bg-proto">
+  <div data-proto-legacy hidden><PlanetBackground /></div>
+</div>
+{import.meta.env.DEV && <PrototypeSwitcher />}
+
+<script>
+import { VARIANTS, type VariantKey } from "./shared";
+
+const host = document.getElementById("bg-proto")!;
+const keys = VARIANTS.map((v) => v.key) as readonly string[];
+const fromUrl = new URLSearchParams(location.search).get("variant");
+const variant = (
+  fromUrl && keys.includes(fromUrl)
+    ? fromUrl
+    : (sessionStorage.getItem("bg-variant") ?? keys[0])
+) as VariantKey;
+sessionStorage.setItem("bg-variant", variant);
+host.dataset.variant = variant;
+
+const loaders: Record<
+  VariantKey,
+  () => Promise<{ mount: (h: HTMLElement) => void }>
+> = {
+  canvas: () => import("./canvas2d"),
+  shader: () => import("./shader"),
+  three: () => import("./three"),
+  current: () => import("./current"),
+};
+const t0 = performance.now();
+const mod = await loaders[variant]();
+mod.mount(host);
+console.info(
+  `[bg-proto] ${variant} mounted in ${(performance.now() - t0).toFixed(0)}ms`
+);
+</script>

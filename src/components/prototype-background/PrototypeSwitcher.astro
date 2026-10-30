@@ -1,0 +1,86 @@
+---
+// PROTOTYPE — dev-only floating variant switcher + perf HUD.
+---
+
+<div
+  id="proto-switcher"
+  transition:persist
+  transition:name="proto-switcher"
+  class="fixed bottom-4 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-1 rounded-full bg-white text-black shadow-[0_8px_30px_rgba(0,0,0,0.6)] px-1 py-1 font-mono text-xs select-none"
+>
+  <button
+    type="button"
+    data-dir="-1"
+    class="size-7 rounded-full hover:bg-black/10"
+    aria-label="Previous variant">←</button
+  >
+  <div class="px-2 text-center min-w-64">
+    <div data-label class="font-bold"></div>
+    <div data-hud class="opacity-60 tabular-nums"></div>
+  </div>
+  <button
+    type="button"
+    data-dir="1"
+    class="size-7 rounded-full hover:bg-black/10"
+    aria-label="Next variant">→</button
+  >
+</div>
+
+<script>
+import { stats, VARIANTS } from "./shared";
+
+// Re-query every time: survives ClientRouter swapping the element.
+const $ = (sel: string) =>
+  document.querySelector<HTMLElement>(`#proto-switcher ${sel}`);
+const current = () =>
+  document.getElementById("bg-proto")?.dataset.variant ?? VARIANTS[0].key;
+const index = () => VARIANTS.findIndex((v) => v.key === current());
+
+const go = (dir: number) => {
+  const next =
+    VARIANTS[(index() + dir + VARIANTS.length) % VARIANTS.length].key;
+  sessionStorage.setItem("bg-variant", next);
+  const url = new URL(location.href);
+  url.searchParams.set("variant", next);
+  // Full reload: tearing down WebGL contexts cleanly isn't worth it here.
+  location.replace(url);
+};
+
+document.addEventListener("click", (e) => {
+  const dir = (e.target as HTMLElement).closest<HTMLElement>(
+    "#proto-switcher [data-dir]"
+  )?.dataset.dir;
+  if (dir) go(Number(dir));
+});
+window.addEventListener("keydown", (e) => {
+  if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+  const el = document.activeElement as HTMLElement | null;
+  if (el?.closest("input, textarea, [contenteditable]")) return;
+  go(e.key === "ArrowLeft" ? -1 : 1);
+});
+
+// Independent page-level fps counter so every variant (incl. tsparticles)
+// is measured the same way. Also tracks worst frame in the window.
+let frames = 0;
+let worst = 0;
+let last = performance.now();
+let windowStart = last;
+const tick = (now: number) => {
+  frames++;
+  worst = Math.max(worst, now - last);
+  last = now;
+  if (now - windowStart >= 1000) {
+    const fps = Math.round((frames * 1000) / (now - windowStart));
+    const i = index();
+    const label = $("[data-label]");
+    const hud = $("[data-hud]");
+    if (label) label.textContent = `${"ABCD"[i]} · ${VARIANTS[i].name}`;
+    if (hud) hud.textContent = `${fps} fps · worst ${worst.toFixed(0)}ms · js ${stats.ms.toFixed(2)}ms/f${stats.note ? ` · ${stats.note}` : ""}`;
+    frames = 0;
+    worst = 0;
+    windowStart = now;
+  }
+  requestAnimationFrame(tick);
+};
+requestAnimationFrame(tick);
+</script>

@@ -4,6 +4,6 @@ import SpacePageLayout from "./SpacePageLayout.astro";
 const { title } = Astro.props;
 ---
 
-<SpacePageLayout title={title}>
+<SpacePageLayout title={title} bgDim={0.35}>
   <article class="my-8 md:my-12"><slot /></article>
 </SpacePageLayout>
