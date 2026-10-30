@@ -11,14 +11,17 @@ const LIGHT = normalize([0.72, -0.5, 0.18]);
 // Palette from DESIGN.md as sRGB 0..1.
 const VOID_BLACK = [0.118, 0.118, 0.122];
 const PLASMA_MAGENTA = [0.62, 0.25, 0.72];
+const STARLIGHT_GREY = [0.9, 0.9, 0.92];
 
-// Shaded pixels per frame. Fill rate is the whole cost of this effect, so
-// the canvas renders at most this many pixels and CSS scales it up.
-const PIXEL_BUDGET_DESKTOP = 1.3e6;
-const PIXEL_BUDGET_TOUCH = 0.8e6;
+// CSS px per canvas pixel. The retro look comes from rendering this coarse
+// and letting CSS scale it up without smoothing.
+const PIXEL_SIZE = 2;
+const MAX_QUIET_RECTS = 4;
 const MAX_FPS = 60;
 const PARALLAX_EASE = 0.05;
 const DIM_EASE = 0.06;
+// Star density multiplier; 1 is the shader's full density.
+const STAR_DENSITY = 0.35;
 
 function normalize(v: number[]) {
   const l = Math.hypot(...v);
@@ -48,6 +51,7 @@ export function mountSpaceBackground(canvas: HTMLCanvasElement) {
     "(prefers-reduced-motion: reduce)"
   ).matches;
   const finePointer = window.matchMedia("(pointer: fine)").matches;
+  canvas.style.imageRendering = "pixelated";
 
   const gl = canvas.getContext("webgl", {
     alpha: false,
@@ -99,12 +103,17 @@ export function mountSpaceBackground(canvas: HTMLCanvasElement) {
         "uLight",
         "uVoid",
         "uMagenta",
+        "uStarlight",
         "uDim",
+        "uStars",
+        "uQuiet[0]",
+        "uQuietCount",
       ].map((name) => [name, gl.getUniformLocation(program, name)])
     );
     gl.uniform3fv(uniforms.uLight, LIGHT);
     gl.uniform3fv(uniforms.uVoid, VOID_BLACK);
     gl.uniform3fv(uniforms.uMagenta, PLASMA_MAGENTA);
+    gl.uniform3fv(uniforms.uStarlight, STARLIGHT_GREY);
     resize();
     return true;
   };
@@ -112,9 +121,7 @@ export function mountSpaceBackground(canvas: HTMLCanvasElement) {
   const resize = () => {
     const w = window.innerWidth;
     const h = window.innerHeight;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const budget = finePointer ? PIXEL_BUDGET_DESKTOP : PIXEL_BUDGET_TOUCH;
-    const scale = Math.min(dpr, Math.sqrt(budget / (w * h)));
+    const scale = 1 / PIXEL_SIZE;
     canvas.width = Math.round(w * scale);
     canvas.height = Math.round(h * scale);
     gl.viewport(0, 0, canvas.width, canvas.height);
@@ -146,10 +153,28 @@ export function mountSpaceBackground(canvas: HTMLCanvasElement) {
   let dimTarget = readDim();
   let dim = dimTarget;
 
+  // Text blocks the scene stays calm behind. Measured every frame so the
+  // calm zone follows scrolling and layout shifts.
+  const quietRects = new Float32Array(MAX_QUIET_RECTS * 4);
+  const measureQuiet = () => {
+    let n = 0;
+    for (const el of document.querySelectorAll("[data-bg-quiet]")) {
+      if (n >= MAX_QUIET_RECTS) break;
+      const r = el.getBoundingClientRect();
+      if (r.bottom < -100 || r.top > window.innerHeight + 100) continue;
+      quietRects.set([r.left, r.top, r.width, r.height], n * 4);
+      n++;
+    }
+    gl.uniform4fv(uniforms["uQuiet[0]"], quietRects);
+    gl.uniform1f(uniforms.uQuietCount, n);
+  };
+
   const draw = (time: number) => {
     gl.uniform1f(uniforms.uTime, time);
     gl.uniform2f(uniforms.uMouse, parallax.x, parallax.y);
     gl.uniform1f(uniforms.uDim, dim);
+    gl.uniform1f(uniforms.uStars, STAR_DENSITY);
+    measureQuiet();
     gl.drawArrays(gl.TRIANGLES, 0, 3);
   };
 
@@ -183,6 +208,10 @@ export function mountSpaceBackground(canvas: HTMLCanvasElement) {
       if (reducedMotion) draw(0);
     }, 150);
   });
+
+  // Reduced motion draws still frames, so redraw when the text moves.
+  if (reducedMotion)
+    window.addEventListener("scroll", () => draw(0), { passive: true });
 
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) stop();

@@ -89,7 +89,7 @@ components:
 
 **Creative North Star: "The Hand-Drawn Star Chart"**
 
-The site is a navigator's chart of a small universe. A clean, dark sci-fi base (near-black space, faint drifting stars, two half-lit planets on the horizon) carries the structure, and a handwritten voice scribbles notes in the margins: the Caveat wordmark, the wavy gold underline, the odd emphasised word. The chart is precise; the handwriting is what makes it one person's chart.
+The site is a navigator's chart of a small universe. A clean, dark sci-fi base (near-black space rendered as retro pixel art: sparse stars, a stippled nebula, two half-lit planets on the horizon) carries the structure, and a handwritten voice scribbles notes in the margins: the Caveat wordmark, the wavy gold underline, the odd emphasised word. The chart is precise; the handwriting is what makes it one person's chart.
 
 It should feel curious, handmade and nerdy. Curious: projects are bodies to approach, and each one rewards a closer look. Handmade: a little imperfect, a little playful, clearly not a template. Nerdy: sci-fi references and nods to the retro web are welcome, as long as they stay legible. Interactive pieces are minimal and restrained; most of the screen is calm, and the energy comes from small, exact details.
 
@@ -97,7 +97,7 @@ It must never drift toward neon cyberpunk (heavy glows, glitch effects, saturate
 
 **Key Characteristics:**
 
-- Near-black space with a faint nebula and layered starfield behind everything, shifting subtly with the pointer.
+- Near-black space behind everything, drawn as chunky pixel art: blocky dithered planets, a stippled magenta nebula and single-pixel stars, shifting subtly with the pointer and clearing away behind text.
 - One sans family (Lato) for structure; Caveat handwriting only for the wordmark and short accents.
 - Two signal colors used sparingly: Plasma Magenta for interaction, Comet Yellow for handwritten emphasis.
 - Depth from light, blur and glow; no drop shadows on UI.
@@ -124,7 +124,7 @@ The site is dark only. There is no light theme; `:root` sets `color-scheme: dark
 
 Colors are defined once on `:root` in `src/styles/global.css` as bare OKLCH channel triplets (`--foreground`, `--background`, `--primary`, `--accent`) and exposed to Tailwind as `foreground`, `background`, `primary`, `accent`. Opacity variants (`foreground/50`, `primary/50`) are how tints are made; there is no separate tint scale.
 
-The background planets are a muted slate-blue banded gas giant and a muted emerald rocky world with icy poles, both lit from the upper right, and the orbiting moons pick from a small set of muted rose, emerald, comet, blue and stone gradients. These are scenery, not UI colors; the nebula borrows a trace of Plasma Magenta at under 10% strength.
+The background planets are a muted slate-blue banded gas giant and a muted emerald rocky world with icy poles, both lit from the upper right, and the orbiting moons pick from a small set of muted rose, emerald, comet, blue and stone gradients. In the pixel-art background the planets are drawn from a short blue ramp (void, navy, blue, pale blue, Starlight Grey) dithered in 2×2 patterns, with Starlight Grey contour lines. These are scenery, not UI colors; the nebula is a sparse stipple of dimmed Plasma Magenta.
 
 ### Named Rules
 
@@ -165,13 +165,13 @@ The home page stacks the hero and the project grid with 64px between them. Proje
 
 Spacing follows Tailwind's 4px base. The steps actually used are 8px (between tags), 16px (inside cards, between icons), 32px (card padding and grid gaps) and 64px (between page sections).
 
-The background scene (nebula, three star layers, two planets) is a single WebGL fragment shader on a fixed canvas behind the content (`SpaceBackground.astro`, `space-background.frag`). It persists across Astro view transitions. With a fine pointer, star layers and planets drift a few pixels toward the cursor, nearer layers more. Planets rotate slowly and stars twinkle; under `prefers-reduced-motion` the scene renders one still frame and ignores the pointer. Pages set planet brightness with `bgDim` on `SpacePageLayout` (project pages use 0.35 so prose never sits on a bright planet); the change eases in during navigation. Project images and titles animate between the card and the project page with shared-element view transitions.
+The background scene (nebula, three star layers, two planets) is a single WebGL fragment shader on a fixed canvas behind the content (`SpaceBackground.astro`, `space-background.frag`). It persists across Astro view transitions. It is retro pixel art: the canvas renders at one pixel per 2 CSS px and is scaled up with `image-rendering: pixelated`. Planets are 16px blocks that split to 8px where detail changes, filled with 2×2 dither patterns and engraved with contour lines on a 4px grid; the nebula is an 8×8 Bayer stipple; stars are single pixels at 35% of the shader's full density. Animation steps at 8fps for a stop-motion feel. With a fine pointer, star layers and planets drift gently toward the cursor (30% strength), nearer layers more. Planets rotate slowly and about one star in eight blinks slowly; under `prefers-reduced-motion` the scene renders one still frame and ignores the pointer. Pages set planet brightness with `bgDim` on `SpacePageLayout` (project pages use 0.35 so prose never sits on a bright planet); the change eases in during navigation. Text blocks marked `data-bg-quiet` (the home hero, the project header and the prose column) get a quiet zone: the shader clears stipple, stars and contours behind them and drops planets to their two darkest steps, dissolving the edge over about 56px in dithered 8px blocks. Up to four zones are measured every frame, so they follow scrolling. Project images and titles animate between the card and the project page with shared-element view transitions.
 
-Performance: the shader is the whole cost, so it renders within a pixel budget (about 1.3M shaded pixels on desktop, 0.8M on touch) and is scaled up by CSS, caps at 60fps and pauses while the tab is hidden. Without WebGL the page falls back to the plain void background.
+Performance: the shader is the whole cost; rendering at 2 CSS px per pixel keeps it to about a quarter of a 1× screen's pixels. It caps at 60fps and pauses while the tab is hidden. Without WebGL the page falls back to the plain void background.
 
 ## Elevation & Depth
 
-Depth comes from light, not shadow. Cards are dark frosted glass (`bg-background/70` with `backdrop-blur-lg`) with a faint inner rim instead of a border, and the background planets carry a thin atmospheric glow on their lit side. Layers are separated by blur, transparency and z-order behind the content, never by drop shadows under UI.
+Depth comes from light, not shadow. Cards are dark frosted glass (`bg-background/70` with `backdrop-blur-lg`) with a faint inner rim instead of a border, and the background planets carry a pale rim on their lit side. Layers are separated by blur, transparency and z-order behind the content, never by drop shadows under UI.
 
 ### Shadow Vocabulary
 
