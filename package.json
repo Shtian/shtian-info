@@ -13,12 +13,12 @@
     "typecheck": "astro check"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.8",
-    "@astrojs/react": "^5.0.2",
-    "@tailwindcss/vite": "^4.2.2",
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/react": "^7.1.0",
+    "@tailwindcss/vite": "^4.3.1",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
-    "astro": "^6.1.5",
+    "astro": "^7.4.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sharp": "^0.33.5",
