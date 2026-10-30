@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-30T00:00:00Z",
+  "title": "Design System: Shtian's universe",
+  "extensions": {
+    "colorMeta": {
+      "plasma-magenta": {
+        "role": "primary",
+        "displayName": "Plasma Magenta",
+        "canonical": "oklch(55.7% 0.199 314.53)",
+        "tonalRamp": [
+          "#110617",
+          "#39014d",
+          "#640085",
+          "#8528a9",
+          "#ab51d0",
+          "#d278f9",
+          "#e9b1ff",
+          "#f9e7ff"
+        ]
+      },
+      "comet-yellow": {
+        "role": "secondary",
+        "displayName": "Comet Yellow",
+        "canonical": "oklch(81.18% 0.161 97.64)",
+        "tonalRamp": [
+          "#0f0b00",
+          "#322200",
+          "#583b00",
+          "#775a00",
+          "#9b7e00",
+          "#c0a400",
+          "#ddcb7b",
+          "#f4efd7"
+        ]
+      },
+      "void-black": {
+        "role": "neutral",
+        "displayName": "Void Black",
+        "canonical": "oklch(18.98% 0 294)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242425",
+          "#403f42",
+          "#5e5d60",
+          "#808082",
+          "#a5a4a7",
+          "#cacacc",
+          "#eeeeef"
+        ]
+      },
+      "starlight-grey": {
+        "role": "neutral",
+        "displayName": "Starlight Grey",
+        "canonical": "oklch(90% 0.004 297)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242425",
+          "#403f42",
+          "#5e5d60",
+          "#808082",
+          "#a5a4a7",
+          "#cacacc",
+          "#eeeeef"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "The Caveat 'shtian's universe' wordmark in the header. The only large use of Caveat."
+      },
+      "display": {
+        "displayName": "Display",
+        "purpose": "The home greeting, typed out on load."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Project page titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Project names on planet cards."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Prose and hero copy, about 65ch wide."
+      },
+      "body-small": {
+        "displayName": "Body Small",
+        "purpose": "Project descriptions on cards."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Tag chips."
+      },
+      "script-accent": {
+        "displayName": "Script Accent",
+        "purpose": "One to three handwritten words inline, with a wavy Comet Yellow underline."
+      }
+    },
+    "shadows": [
+      {
+        "name": "glass-rim",
+        "value": "inset 0 0 4px oklch(var(--foreground) / 0.1)",
+        "purpose": "The edge of a frosted-glass project card."
+      },
+      {
+        "name": "planet-halo",
+        "value": "0 0 100px 1px oklch(var(--foreground) / 0.1)",
+        "purpose": "Soft glow around background planets."
+      },
+      {
+        "name": "terminator",
+        "value": "0 0 120px 72px oklch(var(--background))",
+        "purpose": "The shadow side of a background planet, in the page background color."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-change",
+        "value": "300ms ease",
+        "purpose": "Default for hover and reveal transitions (planet color, scale, orbit ring, sheen)."
+      },
+      {
+        "name": "reveal-stagger",
+        "value": "300ms, 600ms delays",
+        "purpose": "Orbit ring follows the planet after 300ms; the moon appears after 600ms."
+      },
+      {
+        "name": "orbit",
+        "value": "24s linear infinite",
+        "purpose": "A moon circling a hovered or in-view planet."
+      },
+      {
+        "name": "typewriter",
+        "value": "40ms per character",
+        "purpose": "The home greeting typing itself out."
+      },
+      {
+        "name": "twinkle",
+        "value": "2s",
+        "purpose": "Opacity pulse (1 → 0.5 → 1) for small lights."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Project Planet Card",
+      "kind": "card",
+      "refersTo": "project-planet-card",
+      "description": "Frosted-glass card with a circular greyscale planet that turns to color, gains an orbit ring and a moon on hover.",
+      "html": "<a class=\"ds-planet-card\" href=\"#\"><div class=\"ds-planet\"><div class=\"ds-planet-body\"></div><div class=\"ds-planet-ring\"></div><div class=\"ds-planet-orbit\"><div class=\"ds-planet-moon\"></div></div></div><h3 class=\"ds-planet-title\">ChromaScope</h3><p class=\"ds-planet-desc\">A simple CLI to get a visual diff across various browser engines</p><div class=\"ds-planet-tags\"><span class=\"ds-tag\">Playwright</span><span class=\"ds-tag\">CLI</span></div></a>",
+      "css": ".ds-planet-card { position: relative; display: flex; flex-direction: column; gap: 32px; padding: 32px 16px; border-radius: 6px; color: var(--color-foreground); text-decoration: none; font-family: Lato, system-ui, sans-serif; backdrop-filter: blur(16px); box-shadow: inset 0 0 4px color-mix(in oklch, var(--color-foreground) 10%, transparent); background-image: linear-gradient(to bottom right, rgb(255 255 255 / 0), transparent); transition: background-image 300ms; } .ds-planet-card:hover { background-image: linear-gradient(to bottom right, rgb(255 255 255 / 0.05), transparent); } .ds-planet-card:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--color-background), 0 0 0 4px var(--color-primary); } .ds-planet { position: relative; width: 160px; height: 160px; margin: 0 auto; } .ds-planet-body { position: absolute; inset: 0; border-radius: 9999px; background: radial-gradient(circle at 30% 30%, #6b8fb8, #1e3a5f 70%); filter: grayscale(1) brightness(0.9) contrast(1.1) saturate(0.9); transition: transform 300ms, filter 300ms; } .ds-planet-card:hover .ds-planet-body { transform: scale(1.05); filter: grayscale(0) brightness(0.9) contrast(1.1) saturate(0.9); } .ds-planet-ring { position: absolute; inset: 0; border-radius: 9999px; outline: 2px dashed transparent; transition: inset 300ms 300ms, outline-color 300ms 300ms; } .ds-planet-card:hover .ds-planet-ring { inset: -16px; outline-color: color-mix(in oklch, var(--color-foreground) 10%, transparent); } .ds-planet-orbit { position: absolute; inset: -16px; border-radius: 9999px; opacity: 0; transition: opacity 300ms 600ms; animation: ds-orbit 24s linear infinite; } .ds-planet-card:hover .ds-planet-orbit { opacity: 1; } .ds-planet-moon { position: absolute; left: 50%; top: 0; width: 16px; height: 16px; border-radius: 9999px; transform: translate(-50%, -50%); background: radial-gradient(at 25% 25%, var(--color-accent), rgb(245 158 11 / 0.8) 75%); } @keyframes ds-orbit { to { transform: rotate(360deg); } } .ds-planet-title { margin: 0; font-size: 1.125rem; font-weight: 400; text-align: center; } .ds-planet-desc { margin: 0; font-size: 0.875rem; line-height: 1.43; text-align: center; } .ds-planet-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }"
+    },
+    {
+      "name": "Tag Chip",
+      "kind": "chip",
+      "refersTo": "tag-chip",
+      "description": "Pill with a 1px Plasma Magenta outline listing a project's technology.",
+      "html": "<span class=\"ds-tag\">SvelteKit</span>",
+      "css": ".ds-tag { display: inline-block; border: 1px solid var(--color-primary); border-radius: 9999px; padding: 4px 8px; font-family: Lato, system-ui, sans-serif; font-size: 0.75rem; line-height: 1.33; color: var(--color-foreground); }"
+    },
+    {
+      "name": "Script Link",
+      "kind": "custom",
+      "refersTo": "script-link",
+      "description": "Handwritten Caveat link with a wavy Comet Yellow underline that turns magenta on hover.",
+      "html": "<p class=\"ds-copy\">Looking for an experienced consultant? <a class=\"ds-script-link\" href=\"#\">Let's talk.</a></p>",
+      "css": ".ds-copy { font-family: Lato, system-ui, sans-serif; font-size: 1rem; line-height: 1.75; color: var(--color-foreground); } .ds-script-link { font-family: Caveat, ui-serif, serif; font-size: 1.125rem; font-weight: 700; margin: 0 4px; color: var(--color-foreground); text-decoration: underline wavy 2px var(--color-accent); text-underline-offset: 4px; transition: text-decoration-color 150ms; } .ds-script-link:hover { text-decoration-color: var(--color-primary); } .ds-script-link:focus-visible { outline: none; border-radius: 4px; box-shadow: 0 0 0 2px var(--color-background), 0 0 0 4px var(--color-primary); }"
+    },
+    {
+      "name": "Icon Link",
+      "kind": "button",
+      "refersTo": "icon-link",
+      "description": "24px line icon at half-strength Starlight Grey, full strength on hover.",
+      "html": "<a class=\"ds-icon-link\" href=\"#\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4\"></path><path d=\"M9 18c-4.51 2-5-2-7-2\"></path></svg><span class=\"ds-sr-only\">GitHub</span></a>",
+      "css": ".ds-icon-link { display: inline-flex; color: color-mix(in oklch, var(--color-foreground) 50%, transparent); transition: color 150ms; } .ds-icon-link:hover { color: var(--color-foreground); } .ds-icon-link:focus-visible { outline: none; border-radius: 4px; box-shadow: 0 0 0 2px var(--color-background), 0 0 0 4px var(--color-primary); } .ds-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }"
+    },
+    {
+      "name": "Wordmark",
+      "kind": "nav",
+      "refersTo": "wordmark",
+      "description": "The header: a Caveat wordmark linking home, and nothing else.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-wordmark\" href=\"#\">shtian's universe</a></header>",
+      "css": ".ds-header { display: flex; justify-content: space-between; align-items: center; padding: 16px; } .ds-wordmark { font-family: Caveat, ui-serif, serif; font-size: 3.75rem; line-height: 1; color: var(--color-foreground); text-decoration: none; } .ds-wordmark:focus-visible { outline: none; border-radius: 4px; box-shadow: 0 0 0 2px var(--color-background), 0 0 0 4px var(--color-primary); }"
+    },
+    {
+      "name": "Toast",
+      "kind": "custom",
+      "refersTo": "toast",
+      "description": "Small bottom-centre confirmation that fades out after 5 seconds.",
+      "html": "<div class=\"ds-toast\">Discord username copied!</div>",
+      "css": ".ds-toast { display: inline-block; background: rgb(0 0 0 / 0.8); color: #fff; padding: 8px 16px; border-radius: 6px; font-family: Lato, system-ui, sans-serif; font-size: 1rem; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Hand-Drawn Star Chart",
+    "overview": "The site is a navigator's chart of a small universe. A clean, dark sci-fi base (near-black space, faint drifting stars, two half-lit planets on the horizon) carries the structure, and a handwritten voice scribbles notes in the margins: the Caveat wordmark, the wavy gold underline, the odd emphasised word. The chart is precise; the handwriting is what makes it one person's chart.\n\nIt should feel curious, handmade and nerdy. Curious: projects are bodies to approach, and each one rewards a closer look. Handmade: a little imperfect, a little playful, clearly not a template. Nerdy: sci-fi references and nods to the retro web are welcome, as long as they stay legible. Interactive pieces are minimal and restrained; most of the screen is calm, and the energy comes from small, exact details.\n\nIt must never drift toward neon cyberpunk (heavy glows, glitch effects, saturated neon everywhere) or corporate SaaS (gradient heroes, stock illustration, generic feature-card grids).",
+    "keyCharacteristics": [
+      "Near-black space with a sparse, slowly drifting starfield behind everything.",
+      "One sans family (Lato) for structure; Caveat handwriting only for the wordmark and short accents.",
+      "Two signal colors used sparingly: Plasma Magenta for interaction, Comet Yellow for handwritten emphasis.",
+      "Depth from light, blur and glow; no drop shadows on UI.",
+      "Projects shown as planets: circular, greyscale at rest, coming into color when approached."
+    ],
+    "rules": [
+      {
+        "name": "The Two Signals Rule",
+        "body": "Magenta means \"you can interact with this\"; yellow means \"this is the handwritten voice\". Don't swap them, and don't introduce a third signal color for UI.",
+        "section": "colors"
+      },
+      {
+        "name": "The Dark Sky Rule",
+        "body": "Signal colors appear as lines, rings and outlines, never as large filled areas. If a screen has a magenta or yellow block bigger than a tag, it has drifted toward neon.",
+        "section": "colors"
+      },
+      {
+        "name": "The Margin Note Rule",
+        "body": "Caveat is for the wordmark and short inline accents of one to three words. Never set a paragraph, heading or UI label in it.",
+        "section": "typography"
+      },
+      {
+        "name": "The Starlight Rule",
+        "body": "If something needs to stand out, give it light (a glow, a rim, a lift in brightness), not a drop shadow. Glows stay faint, at 10% opacity or less, so they never read as neon.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep the background near-black (`oklch(18.98% 0 294)`) with the starfield and planets fixed behind the content.",
+      "Do use Plasma Magenta only for interaction (focus, outlines, hover) and Comet Yellow only for handwritten emphasis.",
+      "Do keep components quiet at rest and let state changes be subtle and exact (300ms transitions, small scale steps, opacity shifts).",
+      "Do build depth with blur, faint rims and glows at 10% opacity or less.",
+      "Do keep circles for things that are \"bodies\" (planets, moons, avatars) and gentle 6–12px corners for containers.",
+      "Do use the theme tokens (`foreground`, `background`, `primary`, `accent`) with opacity rather than adding new grey values."
+    ],
+    "donts": [
+      "Don't add neon-cyberpunk treatments: strong glows, glitch effects, scanlines or saturated neon fills.",
+      "Don't add corporate SaaS patterns: gradient hero banners, stock illustrations, generic icon-and-heading feature grids.",
+      "Don't set more than a few words in Caveat, or use it for UI labels.",
+      "Don't put drop shadows under cards or buttons.",
+      "Don't fill large areas with Plasma Magenta or Comet Yellow.",
+      "Don't add a light theme or theme toggle; the site is dark only."
+    ]
+  }
+}
