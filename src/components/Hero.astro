@@ -17,6 +17,8 @@ function copyDiscordUsername() {
 // Add typewriter effect
 document.addEventListener("astro:page-load", () => {
   const heading = document.querySelector(".typewriter");
+  // The page-load listener outlives the home page under the ClientRouter.
+  if (!heading) return;
   const text = heading.textContent;
   const width = heading.offsetWidth;
   const height = heading.offsetHeight;
