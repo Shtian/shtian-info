@@ -1,27 +1,25 @@
 ---
 name: Authenticlash
-description: "Bored of 2FA-codes? I created a game to make them more interesting!"
-date: 2024-01-01
+description: "A competitive game built around the two-digit codes your authenticator throws at you"
+date: 2023-12-16
 slug: authenticlash
 link: https://www.github.com/shtian/authenticlash
 cover: "./images/authenticlash-cover.jpg"
 tags:
   - SvelteKit
   - Supabase
-  - Game
   - OpenAI
+  - Game
 ---
 
-This project started with the idea of something as stupid as "How can I make 2-FA codes more fun?". Specifically the 10-99 codes from Microsoft Authenticator/GitHub Authenticator (and probably others). I set out to build a game around this to play with friends or colleagues.
+It started with a question nobody asked: how do I make 2FA codes fun? You know the ones. Microsoft Authenticator, GitHub Mobile and friends flash a random number between 1 and 99 at you several times a day. Authenticlash turns those numbers into points.
 
-The project is made with SvelteKit as the frontend framework and Supabase for persisting data.
+Someone creates a game with an end date and a cooldown, then shares the link with friends or colleagues. Every time you get a code, you punch it in. The scores pile up, and whoever has the highest total when the clock runs out wins.
 
-Later on a number of integrations with OpenAI SDK has been made. One to generate profile pictures each week as well as a prompt to have a custom personality comment each event during the game.
+Raw luck got old fast, so I bolted on an RPG layer. When you join a game you pick a class (Thief, Barbarian, Necromancer, Paladin, Warden or Diceblade), each with its own active and passive abilities for stealing, boosting or gambling with points. An AI commentator narrates every move in the event log, and the game creator picks its personality. When a game ends, the winner gets a generated victory image, and everyone gets a weekly AI avatar based on a nickname, a creature and a random backdrop.
 
-Players can generate a game which lasts for a set period of time. They can also specify how often players should be able to add a code. During the game, each code you add is accumulated to your total score. The player with the highest score win the game.
+Then there are the badges, because what is a game without achievements? Dozens of them, a few secret ones 🤫, a global unlock rate, and a stats page that tracks your wins and losses over time.
 
-To add some more strategic and fun elements, players can now choose their class as they enter the game. There are a number of classes and each class has different active/passive skills.
+Under the hood it is SvelteKit 5 with Supabase for auth and data, OpenAI for the commentator and image generation, and Sentry keeping an eye on things. It has been running since late 2023 and still gets new classes when I get the itch.
 
-Players can also see their global stats, as well as earn achievements (integral part of any game, as we can all agree).
-
-Visit [www.authenticlash.app](https://www.authenticlash.app) to check it out 👀
+Play it at [authenticlash.app](https://www.authenticlash.app) 👀
