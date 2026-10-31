@@ -1,5 +1,38 @@
 packages:
   - .
+
 catalog:
   vite: npm:@voidzero-dev/vite-plus-core@1.4.0
   vite-plus: 1.4.0
+
+# Share one content-addressed node_modules tree across all projects on this machine.
+enableGlobalVirtualStore: true
+
+# Supply-chain hardening
+minimumReleaseAge: 1440
+trustPolicy: no-downgrade
+# Published without provenance after earlier provenance-signed releases.
+# @vercel/*: transitive deps of @astrojs/vercel. Provenance was dropped after
+# @vercel/functions 3.7.6; releases still come from vercel/vercel via GitHub
+# Actions OIDC. Pinned to exact versions, so a bump needs a fresh review.
+trustPolicyExclude:
+  - chokidar@4.0.3
+  - "@vercel/functions@3.10.5"
+  - "@vercel/cli-exec@1.0.1"
+  - "@vercel/cli-config@0.3.5"
+  - "@vercel/oidc@4.0.5"
+  - "@vercel/routing-utils@6.6.1"
+blockExoticSubdeps: true
+strictDepBuilds: true
+allowBuilds:
+  esbuild: true
+  sharp: true
+
+overrides:
+  vite: "catalog:"
+
+peerDependencyRules:
+  allowAny:
+    - vite
+  allowedVersions:
+    vite: "*"
