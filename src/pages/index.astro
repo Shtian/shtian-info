@@ -1,11 +1,13 @@
 ---
 import Hero from "../components/Hero.astro";
 import ProjectPlanets from "../components/ProjectPlanets.astro";
+import VisitorMeteor from "../components/VisitorMeteor.astro";
 import SpacePageLayout from "../layouts/SpacePageLayout.astro";
 ---
 
 <SpacePageLayout>
-  <div class="flex flex-col gap-16 my-4 md:my-8">
+  <div class="relative flex flex-col gap-16 my-4 md:my-8">
+    <VisitorMeteor />
     <Hero />
     <ProjectPlanets />
   </div>
