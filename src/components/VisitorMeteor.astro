@@ -1,0 +1,121 @@
+---
+interface Props {
+  /** Visitors so far. The current visitor is shown as the next one. */
+  count: number;
+}
+
+const { count } = Astro.props;
+const visitor = count + 1;
+---
+
+<div
+  data-visitor-meteor
+  data-visitor={visitor}
+  class="absolute right-0 top-0 w-full md:w-[460px] h-[112px] md:h-[150px]"
+>
+  <svg
+    class="absolute inset-0 size-full overflow-visible"
+    aria-hidden="true"
+    shape-rendering="crispEdges"
+  >
+    <defs>
+      <mask
+        id="visitor-meteor-track"
+        maskUnits="userSpaceOnUse"
+        x="-20"
+        y="-20"
+        width="2000"
+        height="400"
+      >
+        <path
+          class="track-reveal"
+          pathLength="1"
+          fill="none"
+          stroke="white"
+          stroke-width="8"></path>
+      </mask>
+    </defs>
+    <path class="radiant stroke-foreground/50" stroke-width="1"></path>
+    <path
+      class="track"
+      fill="none"
+      stroke="oklch(var(--foreground) / 0.45)"
+      stroke-width="1"
+      stroke-dasharray="2 5"
+      stroke-linecap="round"
+      mask="url(#visitor-meteor-track)"
+      shape-rendering="geometricPrecision"></path>
+    <circle
+      class="impact"
+      r="4"
+      fill="none"
+      stroke="oklch(var(--foreground) / 0.7)"
+      stroke-width="1"
+      shape-rendering="geometricPrecision"></circle>
+    <g class="meteor"></g>
+  </svg>
+  <p
+    class="note absolute right-0 top-[46px] md:right-auto md:left-[252px] md:top-[68px] flex flex-col items-end md:items-start gap-1 text-right md:text-left"
+    data-bg-quiet
+  >
+    <span class="font-caveat text-2xl leading-none">make a wish</span>
+    <span class="text-xs text-foreground/80 whitespace-nowrap">
+      spacefarer #{visitor.toLocaleString("en-US")} just fell in
+    </span>
+    <span
+      class="logged hidden md:block text-[10px] tracking-[0.15em] uppercase text-foreground/55 whitespace-nowrap"
+    ></span>
+  </p>
+</div>
+
+<style>
+  /* Everything waits hidden until the meteor has passed, so nothing flashes on load. */
+  .track-reveal {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  .radiant,
+  .impact,
+  .note {
+    opacity: 0;
+    transition: opacity 600ms;
+  }
+  .is-tracked .track-reveal {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1s ease-out;
+  }
+  .is-tracked .radiant {
+    opacity: 1;
+  }
+  .is-tracked .impact {
+    opacity: 1;
+    transition-delay: 800ms;
+  }
+  .is-tracked .note {
+    opacity: 1;
+    transition-delay: 1000ms;
+  }
+  .note > :first-child {
+    transition: transform 300ms;
+  }
+  @media (hover: hover) {
+    .note:hover > :first-child {
+      transform: rotate(-3deg) translateX(2px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .is-tracked .track-reveal {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import { mountVisitorMeteor } from "./visitor-meteor";
+
+  document.addEventListener("astro:page-load", () => {
+    for (const el of document.querySelectorAll<HTMLElement>("[data-visitor-meteor]")) {
+      mountVisitorMeteor(el);
+    }
+  });
+</script>

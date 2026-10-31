@@ -200,6 +200,10 @@ The signature component. A frosted-glass card holding a circular 160px cover ima
 
 The top of a project page: you have arrived at the planet. The cover is a 208px (256px from `sm`) circle in full color with the planet shade, a dashed orbit ring 24px out and a stone moon orbiting at the card's pace (still under reduced motion). Beside it (stacked and centred on mobile): a "Charted YYYY" label (0.75rem uppercase, wide tracking, 60% Starlight Grey), the headline, the description at 1.125rem / 80%, tag chips, and a pill link "Source on GitHub" with a hairline `foreground/20` outline that turns Plasma Magenta on hover. The write-up follows in prose.
 
+### Visitor Meteor
+
+The visitor count, told as a shooting star in the sky above the home hero (`VisitorMeteor.astro`, `visitor-meteor.ts`). A pixel-art meteor (a 4px Starlight Grey head with a faint 8px halo and a 2px trail that fades along its length) streaks across in 26 steps at 20fps on a 2px grid, matching the background's pixel art. As it burns out the trail shortens and four spark pixels scatter. Then the chart records it: a dashed pencil track (45% Starlight Grey) draws in from a small ✕ at the radiant, an open circle marks the burn-out point, and a note fades in beside it: "make a wish" in Caveat, "spacefarer #N just fell in", and from `md` a "Meteor VIS-N · logged HH:MM" label. The note is a `data-bg-quiet` zone so the nebula clears behind it. On desktop the streak runs diagonally into the empty sky right of the greeting; on mobile it runs flatter across the full width between the wordmark and the greeting, with the note right-aligned under its end. Hovering the note tilts "make a wish" slightly and replays the meteor. Under reduced motion the track and note appear without the streak. Everything stays hidden until the meteor has passed, so nothing flashes on load.
+
 ### Tag Chips
 
 - **Style:** 1px Plasma Magenta outline, transparent fill, pill shape, label type (0.75rem), 4px × 8px padding.
