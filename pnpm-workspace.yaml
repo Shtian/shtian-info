@@ -1,5 +1,30 @@
 packages:
   - .
+
 catalog:
   vite: npm:@voidzero-dev/vite-plus-core@1.4.0
   vite-plus: 1.4.0
+
+# Share one content-addressed node_modules tree across all projects on this machine.
+enableGlobalVirtualStore: true
+
+# Supply-chain hardening
+minimumReleaseAge: 1440
+trustPolicy: no-downgrade
+# Published without provenance after earlier provenance-signed releases.
+trustPolicyExclude:
+  - chokidar@4.0.3
+blockExoticSubdeps: true
+strictDepBuilds: true
+allowBuilds:
+  esbuild: true
+  sharp: true
+
+overrides:
+  vite: "catalog:"
+
+peerDependencyRules:
+  allowAny:
+    - vite
+  allowedVersions:
+    vite: "*"
