@@ -1,22 +1,22 @@
 ---
 name: Inflation Station
-description: "A local-first personal economy dashboard for tracking spending, income, and cashflow"
-date: 2025-04-01
+description: "A self-hosted personal finance app that turns bank statements into monthly AI reviews"
+date: 2026-02-21
 slug: inflation-station
 link: https://www.github.com/shtian/inflation-station
 cover: "./images/inflation-station-cover.jpg"
 tags:
-  - Next.js
+  - TanStack Start
   - Prisma
   - SQLite
-  - TailwindCSS
+  - Docker
   - OpenAI
 ---
 
-I wanted full visibility into my personal finances without handing my bank data to yet another cloud service. Inflation Station is a local-first economy dashboard that runs entirely on your own machine, storing everything in a SQLite database managed by Prisma.
+My money is spread across Norwegian banks and cards that never talk to each other, and I did not want to hand my statements to yet another cloud service to get the full picture. Inflation Station is a self-hosted finance app where every transaction ends up in one ledger, stored in SQLite on my own server.
 
-The core loop is simple: import bank statements, categorize transactions, and explore the results. A configurable import pipeline maps CSV exports from different banks into a canonical format, then applies rule-based categorization so recurring merchants get sorted automatically. For the long tail of transactions that don't match any rule, an optional OpenAI integration suggests categories with a confidence score and reasoning, keeping the manual effort to a minimum.
+The monthly ritual goes like this: import the month's CSV exports and PDF invoices, check the categories, then read the monthly review. Categorization runs in two steps. Rules that match on merchant text go first, so the usual suspects get sorted the same way every time. Whatever is left gets an AI suggestion with a calibrated confidence score, and I always have the final say before anything is saved.
 
-The analytics dashboard ties it all together with inflow/outflow charts, net cashflow trends, category spend breakdowns, and per-account state tracking. Date range presets and account filters make it easy to zoom in on a specific month or compare across accounts. There is also a monthly review feature that uses AI to generate a written summary of your spending patterns.
+The monthly review is the point of the whole thing. Instead of just another chart, it explains the month in writing and points out things I would not have noticed on my own. Around it are an overview dashboard, accounts, subscriptions, trips for keeping track of what a holiday really cost, and Spør, a chat assistant you can ask questions about your own spending.
 
-The whole thing is built with Next.js, React 19, and TailwindCSS with shadcn/ui components. It runs happily on a Raspberry Pi, which makes it a nice always-on home server setup if you want the dashboard accessible across devices on your local network.
+It is built with TanStack Start on Vite+, Prisma and SQLite, with the Vercel AI SDK talking to OpenAI. Releases ship as a Docker image that I run on Coolify, with one instance per family member, each with its own database. A feedback button in the app files GitHub issues straight into the repo.

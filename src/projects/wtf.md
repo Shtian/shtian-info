@@ -1,7 +1,7 @@
 ---
 name: Where's the Fault (WTF)?
-description: "An interactive terminal-based assistant to trace the source of alerts"
-date: 2024-09-16
+description: "A terminal-style troubleshooting guide for tracing alerts back to their source"
+date: 2024-09-29
 slug: wheres-the-fault
 link: https://www.github.com/shtian/wheres-the-fault
 cover: "./images/wtf-cover.jpg"
@@ -9,23 +9,12 @@ tags:
   - Svelte
   - DevOps
   - Monitoring
-  - CLI
 ---
 
-When an alert pops up in your monitoring channel, figuring out its source can be a hassle. Maybe someone is new to the team? Maybe you just forgot the correct procedure to follow during an incident? _Where's the Fault (WTF)?_ is a terminal-based assistant designed to help dev teams trace the origin of an issue through an interactive, structured workflow.
+An alert pops up in the monitoring channel. Where does it come from, and what do you do about it? If you are new to the team, or it has been a while since the last incident, the answer usually lives in someone else's head. _Where's the Fault (WTF)?_ puts that knowledge into an interactive guide.
 
-Built with Svelte, it provides a streamlined way to navigate through possible causes and solutions.
+It looks like a terminal in a little desktop window, complete with a top bar and a dock. It walks you through a flowchart of questions: Which channel did the alert land in? Is it one of the known errors? Each answer leads to the next step, an explanation, or a link straight to the right Slack thread or runbook.
 
-## How It Works
+The flow is defined as a typed array of prompts in `src/lib/prompts.ts`. Each prompt is a question that branches, an info message, or a link. TypeScript keeps the flow consistent, so the team can update it without breaking anything.
 
-At its core, WTF is an interactive flowchart presented in a terminal interface. It guides users through a series of prompts, allowing them to answer questions, get additional information, or jump directly to relevant documentation.
-
-## Configuring the Workflow
-
-The workflow is defined in `src/lib/prompts.ts` as an array called `promptCollection`. Each prompt represents a step in the troubleshooting process and can be one of the following:
-
-- **Questions** → Directs the user to the next step based on their answer.
-- **Information messages** → Provides additional context or explanations.
-- **Links to documentation** → Guides the user to external resources for deeper insights.
-
-All prompts are type-assisted, ensuring consistency and maintainability.
+Built with Svelte and TailwindCSS. There is also a confetti easter egg, if you can find the right key 🎉

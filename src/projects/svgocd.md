@@ -1,6 +1,6 @@
 ---
 name: SVGOCD
-description: "A VS Code extension for optimizing SVG files using SVGO"
+description: "A VS Code extension that runs SVGO on your SVGs without leaving the editor"
 date: 2019-08-26
 slug: svgocd
 link: https://github.com/Shtian/vscode-svgocd
@@ -9,14 +9,13 @@ tags:
   - VS Code
   - Extension
   - SVG
-  - Optimization
+  - SVGO
 ---
 
-A VS Code extension for optimizing SVG files using SVGO. Handy when working with SVGs in VS Code and want to optimize them easily with a command, instead of using external tools.
+SVGs exported from design tools tend to arrive with editor metadata, empty groups and far too many decimals. I got tired of copying them into a separate tool to clean them up, so I wrote a VS Code extension that runs SVGO right where the file is open.
 
-## ✨ Features
+Run `SVGOCD: Optimize current SVG` to clean up the whole file, or select a chunk of SVG markup and optimize only that. When it is done, it tells you how much smaller the file got.
 
-- **One-Click Optimization**: Run SVGO on your current SVG file or selected text using the command `SVGOCD: Optimize current SVG`
-- **Smart Configuration**: Automatically detects and reads `svgo.config.{js, mjs, cjs}` files in your workspace
-- **Flexible Settings**: Configure SVGO plugins directly through VS Code settings
-- **Performance Insights**: Shows file size changes after optimization
+You can configure it in two ways. Every SVGO plugin is available as a VS Code setting, or you can drop a `svgo.config.{js,mjs,cjs}` file into the workspace and the extension picks it up, so it follows the same rules as your build. It is my oldest project still in use, and it has kept up with SVGO 3.
+
+Find it on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=shtian.svgocd).

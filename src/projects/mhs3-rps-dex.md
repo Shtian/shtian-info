@@ -1,7 +1,7 @@
 ---
 name: MHS3 RPS Dex
-description: "A Monster Hunter Stories 3 reference app for browsing monsters by attack type, element, and rank"
-date: 2025-06-01
+description: "A field guide to Monster Hunter Stories 3 attack types, so you always pick the right counter"
+date: 2026-03-31
 slug: mhs3-rps-dex
 link: https://www.github.com/shtian/mhs3-rps-dex
 cover: "./images/mhs3-rps-dex-cover.jpg"
@@ -12,10 +12,10 @@ tags:
   - Vercel
 ---
 
-Monster Hunter Stories 3 has a rock-paper-scissors combat system where every monster leans toward Power, Speed, or Technical. Keeping track of which monster favours which type, and how that changes when they get enraged, is the kind of thing you end up alt-tabbing a wiki for mid-battle. I wanted a faster, more focused tool, so I built MHS3 RPS Dex as a single-page reference app.
+Combat in Monster Hunter Stories 3 is rock-paper-scissors. Every monster leans toward Power, Speed or Technical attacks, and many of them switch when they get enraged. Pick the counter and you win the head-to-head. Pick wrong and you lose it. I kept alt-tabbing to a wiki mid-battle, so I built a reference that answers that one question fast.
 
-The app lets you browse 50+ monsters on a responsive card grid, each color-coded by their default attack type. Filters are the core of the experience: you can search by name, narrow by default or enraged attack type, element, elemental weakness, and star rank. Filters combine with AND logic across dimensions and OR within each, so it is easy to ask questions like "show me all Speed monsters weak to Fire."
+The dex shows 50+ monsters on a responsive card grid, colour-coded by default attack type: red for Power, blue for Speed, green for Technical. The filters do the heavy lifting. You can search by name, jump with a touch-friendly A–Z bar, and narrow by default or enraged attack type, element, elemental weakness and star rank. Filters combine with AND across categories and OR within each one, so "Speed monsters weak to Fire" is two taps away.
 
-Under the hood it runs on React Router 7 in framework mode with server-side rendering for a snappy first load, styled with TailwindCSS 4. The monster dataset is static, which keeps the whole thing simple and deployable as a lightweight Vercel project with no backend to maintain.
+It runs on React Router 7 in framework mode with server-side rendering, styled with TailwindCSS 4. The monster data is a static file, so there is no backend to look after, only a lightweight Vercel deploy.
 
-Visit [mhs3-rps-dex.vercel.app](https://mhs3-rps-dex.vercel.app) to try it out.
+Try it at [mhs3-rps-dex.vercel.app](https://mhs3-rps-dex.vercel.app).

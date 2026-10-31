@@ -89,7 +89,7 @@ components:
 
 **Creative North Star: "The Hand-Drawn Star Chart"**
 
-The site is a navigator's chart of a small universe. A clean, dark sci-fi base (near-black space, faint drifting stars, two half-lit planets on the horizon) carries the structure, and a handwritten voice scribbles notes in the margins: the Caveat wordmark, the wavy gold underline, the odd emphasised word. The chart is precise; the handwriting is what makes it one person's chart.
+The site is a navigator's chart of a small universe. A clean, dark sci-fi base (near-black space rendered as retro pixel art: sparse stars, a stippled nebula, two half-lit planets on the horizon) carries the structure, and a handwritten voice scribbles notes in the margins: the Caveat wordmark, the wavy gold underline, the odd emphasised word. The chart is precise; the handwriting is what makes it one person's chart.
 
 It should feel curious, handmade and nerdy. Curious: projects are bodies to approach, and each one rewards a closer look. Handmade: a little imperfect, a little playful, clearly not a template. Nerdy: sci-fi references and nods to the retro web are welcome, as long as they stay legible. Interactive pieces are minimal and restrained; most of the screen is calm, and the energy comes from small, exact details.
 
@@ -97,7 +97,7 @@ It must never drift toward neon cyberpunk (heavy glows, glitch effects, saturate
 
 **Key Characteristics:**
 
-- Near-black space with a sparse, slowly drifting starfield behind everything.
+- Near-black space behind everything, drawn as chunky pixel art: blocky dithered planets, a stippled magenta nebula and single-pixel stars, shifting subtly with the pointer and clearing away behind text.
 - One sans family (Lato) for structure; Caveat handwriting only for the wordmark and short accents.
 - Two signal colors used sparingly: Plasma Magenta for interaction, Comet Yellow for handwritten emphasis.
 - Depth from light, blur and glow; no drop shadows on UI.
@@ -124,7 +124,7 @@ The site is dark only. There is no light theme; `:root` sets `color-scheme: dark
 
 Colors are defined once on `:root` in `src/styles/global.css` as bare OKLCH channel triplets (`--foreground`, `--background`, `--primary`, `--accent`) and exposed to Tailwind as `foreground`, `background`, `primary`, `accent`. Opacity variants (`foreground/50`, `primary/50`) are how tints are made; there is no separate tint scale.
 
-The background planets use Tailwind's `sky-950` and `emerald-950` with reduced saturation, and the orbiting moons pick from a small set of muted rose, emerald, comet, blue and stone gradients. These are scenery, not UI colors.
+The background planets are a muted slate-blue banded gas giant and a muted emerald rocky world with icy poles, both lit from the upper right, and the orbiting moons pick from a small set of muted rose, emerald, comet, blue and stone gradients. In the pixel-art background the planets are drawn from a short blue ramp (void, navy, blue, pale blue, Starlight Grey) dithered in 2×2 patterns, with Starlight Grey contour lines. These are scenery, not UI colors; the nebula is a sparse stipple of dimmed Plasma Magenta.
 
 ### Named Rules
 
@@ -165,17 +165,18 @@ The home page stacks the hero and the project grid with 64px between them. Proje
 
 Spacing follows Tailwind's 4px base. The steps actually used are 8px (between tags), 16px (inside cards, between icons), 32px (card padding and grid gaps) and 64px (between page sections).
 
-The background scene (starfield, shooting star, two planets) is fixed behind the content and persists across Astro view transitions. Project images and titles animate between the card and the project page with shared-element view transitions.
+The background scene (nebula, three star layers, two planets) is a single WebGL fragment shader on a fixed canvas behind the content (`SpaceBackground.astro`, `space-background.frag`). It persists across Astro view transitions. It is retro pixel art: the canvas renders at one pixel per 2 CSS px and is scaled up with `image-rendering: pixelated`. Planets are 16px blocks that split to 8px where detail changes, filled with 2×2 dither patterns and engraved with contour lines on a 4px grid; the nebula is an 8×8 Bayer stipple; stars are single pixels at 35% of the shader's full density. Animation steps at 8fps for a stop-motion feel. On first load the scene arrives over about 2.2s instead of popping in: light comes from the upper right, so the nebula stipple and stars dissolve in along that diagonal in dithered 8px blocks, then the planets climb the palette ramp one dither step at a time while rising a few px into place, and their contour lines engrave last. The canvas stays hidden until it has drawn a frame, so the blank WebGL context never flashes. Under reduced motion the finished frame fades in with CSS instead. With a fine pointer, star layers and planets drift gently toward the cursor (30% strength), nearer layers more. Planets rotate slowly and about one star in eight blinks slowly; under `prefers-reduced-motion` the scene renders one still frame and ignores the pointer. Pages set planet brightness with `bgDim` on `SpacePageLayout` (project pages use 0.35 so prose never sits on a bright planet); the change eases in during navigation. Text blocks marked `data-bg-quiet` (the home hero, the project header and the prose column) get a quiet zone: the shader clears stipple, stars and contours behind them and drops planets to their two darkest steps, dissolving the edge over about 56px in dithered 8px blocks. Up to four zones are measured every frame, so they follow scrolling. Project images and titles animate between the card and the project page with shared-element view transitions.
+
+Performance: the shader is the whole cost; rendering at 2 CSS px per pixel keeps it to about a quarter of a 1× screen's pixels. It caps at 60fps and pauses while the tab is hidden. Without WebGL the page falls back to the plain void background.
 
 ## Elevation & Depth
 
-Depth comes from light, not shadow. Cards are frosted glass (`backdrop-blur-lg`) with a faint inner rim instead of a border, and the background planets glow softly and fade into the sky. Layers are separated by blur, transparency and z-order behind the content, never by drop shadows under UI.
+Depth comes from light, not shadow. Cards are dark frosted glass (`bg-background/70` with `backdrop-blur-lg`) with a faint inner rim instead of a border, and the background planets carry a pale rim on their lit side. Layers are separated by blur, transparency and z-order behind the content, never by drop shadows under UI.
 
 ### Shadow Vocabulary
 
 - **Glass rim** (`box-shadow: inset 0 0 4px oklch(var(--foreground) / 0.1)`): the edge of a project card.
-- **Planet halo** (`box-shadow: 0 0 100px 1px oklch(var(--foreground) / 0.05–0.1)`): the soft glow around background planets.
-- **Terminator** (`box-shadow: 0 0 120px 72px oklch(var(--background))`): the shadow side of a planet, drawn in the page background color.
+- **Planet shade** (radial gradient from the upper right into `background / 0.85`, plus `inset -10px 10px 18px -8px` cool rim light and a `0 0 60px` glow at 8%): turns a cover image into a lit sphere on project pages, matching the background's light direction.
 
 ### Named Rules
 
@@ -183,7 +184,7 @@ Depth comes from light, not shadow. Cards are frosted glass (`backdrop-blur-lg`)
 
 ## Shapes
 
-The world is round. Planets, moons, the profile photo and tag chips are full circles or pills. Containers are only gently rounded: cards at 6px, the cover figure on project pages at 8px, prose images at 12px. Borders are rare: hairline dividers in `foreground/20`, and the dashed orbit ring that appears around a planet on hover.
+The world is round. Planets, moons, the profile photo and tag chips are full circles or pills. Containers are only gently rounded: cards at 6px, prose images at 12px. Borders are rare: hairline dividers in `foreground/20`, and the dashed orbit ring that appears around a planet on hover.
 
 ## Components
 
@@ -191,9 +192,13 @@ The world is round. Planets, moons, the profile photo and tag chips are full cir
 
 The signature component. A frosted-glass card holding a circular 160px cover image (the planet), the project name, a short description and tag chips.
 
-- **At rest:** the planet is greyscale and slightly dimmed (`brightness-90 contrast-110 saturate-90`); the card is barely visible beyond its glass rim.
+- **At rest:** the planet is greyscale and slightly dimmed (`brightness-90 contrast-110 saturate-90`); the card is dark glass (`bg-background/70`) so text stays readable over the background planets.
 - **Hover (pointer) or scrolled into view (touch):** the planet scales to 105% and turns to full color, a dashed orbit ring expands out to 16px, a small moon starts orbiting (24s per lap, random starting angle and color), and a faint white sheen fades in across the card. Transitions are 300ms, staggered so the ring follows after 300ms and the moon after 600ms.
 - **Navigation:** the whole card is a link. The planet image and title morph into the project page through view transitions.
+
+### Project Hero
+
+The top of a project page: you have arrived at the planet. The cover is a 208px (256px from `sm`) circle in full color with the planet shade, a dashed orbit ring 24px out and a stone moon orbiting at the card's pace (still under reduced motion). Beside it (stacked and centred on mobile): a "Charted YYYY" label (0.75rem uppercase, wide tracking, 60% Starlight Grey), the headline, the description at 1.125rem / 80%, tag chips, and a pill link "Source on GitHub" with a hairline `foreground/20` outline that turns Plasma Magenta on hover. The write-up follows in prose.
 
 ### Tag Chips
 

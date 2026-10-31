@@ -13,14 +13,12 @@
     "typecheck": "astro check"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.8",
-    "@astrojs/react": "^5.0.2",
-    "@tailwindcss/vite": "^4.2.2",
-    "@tsparticles/engine": "^3.8.1",
-    "@tsparticles/slim": "^3.8.1",
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/react": "^7.1.0",
+    "@tailwindcss/vite": "^4.3.1",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
-    "astro": "^6.1.5",
+    "astro": "^7.4.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sharp": "^0.33.5",
@@ -31,18 +29,5 @@
     "@tailwindcss/typography": "^0.5.19",
     "vite-plus": "catalog:"
   },
-  "packageManager": "pnpm@9.12.0+sha512.4abf725084d7bcbafbd728bfc7bee61f2f791f977fd87542b3579dcb23504d170d46337945e4c66485cd12d588a0c0e570ed9c477e7ccdd8507cf05f3f92eaca",
-  "pnpm": {
-    "overrides": {
-      "vite@*": "npm:@voidzero-dev/vite-plus-core@1.4.0"
-    },
-    "peerDependencyRules": {
-      "allowAny": [
-        "vite"
-      ],
-      "allowedVersions": {
-        "vite": "*"
-      }
-    }
-  }
+  "packageManager": "pnpm@12.16.1+sha512.091d1dee7927575661b25dab3c2ae31cafc1c54d6b71ed6a6600cf0c1cb10434a447eae14015f1b23e2e6bedeed79df94a932e2164d2832280dce3fb32f656d1"
 }
