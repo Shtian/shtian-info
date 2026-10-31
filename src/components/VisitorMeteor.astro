@@ -1,16 +1,5 @@
----
-interface Props {
-  /** Visitors so far. The current visitor is shown as the next one. */
-  count: number;
-}
-
-const { count } = Astro.props;
-const visitor = count + 1;
----
-
 <div
   data-visitor-meteor
-  data-visitor={visitor}
   class="absolute right-0 top-0 w-full md:w-[460px] h-[112px] md:h-[150px]"
 >
   <svg
@@ -60,7 +49,7 @@ const visitor = count + 1;
   >
     <span class="font-caveat text-2xl leading-none">make a wish</span>
     <span class="text-xs text-foreground/80 whitespace-nowrap">
-      spacefarer #{visitor.toLocaleString("en-US")} just fell in
+      spacefarer #<span class="visitor"></span> just fell in
     </span>
     <span
       class="logged hidden md:block text-[10px] tracking-[0.15em] uppercase text-foreground/55 whitespace-nowrap"

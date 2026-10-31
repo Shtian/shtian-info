@@ -87,14 +87,35 @@ function streak(root: HTMLElement, onDone: () => void) {
   tick();
 }
 
-export function mountVisitorMeteor(root: HTMLElement) {
+async function fetchVisitorCount(): Promise<number | undefined> {
+  try {
+    const res = await fetch("/api/visitors");
+    if (!res.ok) return undefined;
+    const { count } = await res.json();
+    return typeof count === "number" ? count : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+export async function mountVisitorMeteor(root: HTMLElement) {
+  const wait = new Promise((resolve) => setTimeout(resolve, START_DELAY_MS));
+  const count = await fetchVisitorCount();
+  // Without a count there is nothing to tell, so the sky stays empty.
+  if (count === undefined || !root.isConnected) return;
+
+  // The current visitor is the next one after everyone counted so far.
+  const visitor = count + 1;
+  for (const el of root.querySelectorAll(".visitor")) {
+    el.textContent = visitor.toLocaleString("en-US");
+  }
   const logged = root.querySelector(".logged");
   if (logged) {
     const time = new Date().toLocaleTimeString("en-GB", {
       hour: "2-digit",
       minute: "2-digit",
     });
-    logged.textContent = `Meteor VIS-${root.dataset.visitor} · logged ${time}`;
+    logged.textContent = `Meteor VIS-${visitor} · logged ${time}`;
   }
 
   layout(root);
@@ -103,7 +124,8 @@ export function mountVisitorMeteor(root: HTMLElement) {
   if (reducedMotion) {
     done();
   } else {
-    setTimeout(() => streak(root, done), START_DELAY_MS);
+    await wait;
+    streak(root, done);
   }
 
   let replaying = false;
