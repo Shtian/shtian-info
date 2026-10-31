@@ -6,6 +6,7 @@ const FRAMES = 26;
 const FRAME_MS = 50;
 const TRAIL = 34;
 const START_DELAY_MS = 400;
+const NOTE_DELAY_MS = 1000;
 
 const snap = (v: number) => Math.round(v / 2) * 2;
 const px = (x: number, y: number, size: number, alpha: number) =>
@@ -119,7 +120,14 @@ export async function mountVisitorMeteor(root: HTMLElement) {
   }
 
   layout(root);
-  const done = () => root.classList.add("is-tracked");
+  const done = () => {
+    root.classList.add("is-tracked");
+    // Clear the nebula behind the note only as it fades in (matches its CSS delay).
+    setTimeout(
+      () => root.querySelector(".note")?.setAttribute("data-bg-quiet", ""),
+      NOTE_DELAY_MS
+    );
+  };
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reducedMotion) {
     done();
