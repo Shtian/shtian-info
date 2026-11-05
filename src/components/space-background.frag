@@ -161,10 +161,22 @@ vec4 planet(vec2 p, vec4 P, float tilt, float spin, vec3 atmo, bool giant) {
 vec4 scene(vec2 p) {
   vec2 m = uMouse * PARALLAX;
   vec2 np = (p - m * 3.0) / uRes.y;
-  float neb = fbm2(np * 2.2 + fbm2(np * 1.4 + T * 0.004) * 1.5);
   vec3 col = uVoid;
-  col += uMagenta * smoothstep(0.45, 0.9, neb) * 0.1 * (1.0 - np.y * 0.6);
-  col += vec3(0.12, 0.2, 0.3) * smoothstep(0.5, 0.95, fbm2(np * 3.0 + 9.0)) * 0.14;
+
+  // Nebula: one concentrated cloud in the upper right, stretched along a
+  // diagonal and frayed by warped noise. Dense at the core, wispy at the
+  // fringe, and empty across the rest of the sky.
+  vec2 warp = vec2(fbm2(np * 2.4 + 4.0), fbm2(np * 2.4 + 11.0)) - 0.5;
+  float aspect = uRes.x / uRes.y;
+  vec2 core = vec2(max(aspect - 0.42, aspect * 0.8), 0.2);
+  vec2 q = rot2(0.45) * (np + warp * 0.35 - core);
+  q /= vec2(0.5, 0.15);
+  float env = exp(-dot(q, q));
+  float neb = fbm2(np * 3.2 + fbm2(np * 1.6 + T * 0.004) * 1.6);
+  // Filaments and dark lanes inside the envelope, a bright knot at the core.
+  float cloud = env * smoothstep(0.42, 0.78, neb + env * 0.2);
+  cloud += env * env * env * smoothstep(0.5, 0.7, neb) * 0.8;
+  col += uMagenta * cloud * 0.32;
 
   gEdge = 1e5;
   vec4 rock = planet(p - m * 34.0 * uRock.w, uRock, 0.2, 0.025, vec3(0.6, 0.85, 0.75), false);
