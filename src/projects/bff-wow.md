@@ -12,33 +12,35 @@ tags:
   - Game
 ---
 
-My friends and I started levelling together in World of Warcraft: Forever, and within a week we had stopped playing at the same time. Someone would log in after work, someone else late at night, and the only way to know how the others were doing was to ask in a group chat. BFF is an addon that answers that question inside the game.
+BFF is a World of Warcraft: Forever addon for a group of friends levelling side by side. It works best when you don't all play at the same time, and it also makes the game more social when you do.
 
-When you log in, BFF tells you what happened while you were away: every ding, death and new character your friends had since you last played.
+The heart of it is catching up. When you log in, BFF shows what happened while you were away: every ding, death and new character your friends had since you last played. It doesn't matter who played in the morning and who played at midnight, everyone knows how the others are doing.
 
 ![While you were away: the dings, deaths and new characters your friends had since you last played](./images/bff-wow-hero.jpg)
+
+When you are online together, news arrives as it happens. A friend's ding or death pops up as a small toast with a sound, and one click sends back a reaction: a cheer for a ding, respects for a death, or a welcome for someone new. Reactions travel the same way, so whoever dinged hears about the cheer even if they had already logged off.
+
+![The feed, with one-click cheers, respects and welcomes](./images/bff-wow-feed.jpg)
 
 At the top of the panel the whole crew sits around a campfire, drawn as pixel art. Friends who are playing are awake, friends who aren't are asleep, and a recent death leaves a grave until somebody pays their respects with a flower.
 
 ![The crew gathered around a campfire at the top of the BFF panel](./images/bff-wow-camp.jpg)
 
-Below it, the roster lists every friend's characters, levels, whereabouts and when each was last seen. The feed lets you cheer a ding, pay respects for a death or welcome someone new with one click.
-
-![The roster: every friend's characters, levels and whereabouts](./images/bff-wow-roster.jpg)
-
-![The feed, with one-click cheers, respects and welcomes](./images/bff-wow-feed.jpg)
-
-The rest of the tabs grew out of things we kept asking each other. Goals give the crew something to work towards together, and trophies mark what you did as a group, like clearing a dungeon. Nobody gets ranked. Spares let you offer a piece of gear you don't need, and whoever claims it first gets it by in-game mail. A heatmap shows the hours each friend usually plays, in your own time zone. There is a grid of everyone's professions, so you know who to ask for a craft, and a list of the dungeons you can run with the friends closest to your level.
+Goals give the crew something to work towards together, and trophies mark what you did as a group, like clearing a dungeon. Nobody gets ranked. Spares let you offer a piece of gear you don't need, and whoever claims it first gets it by in-game mail.
 
 ![Goals and trophies the whole crew works towards](./images/bff-wow-goals.jpg)
 
 ![Spares: pass on gear you don't need to a friend](./images/bff-wow-spares.jpg)
 
-![A heatmap of when each friend usually plays](./images/bff-wow-when.jpg)
+The rest is an eagle-eye view of the crew. The roster lists every friend's characters, levels, whereabouts and when each was last seen. A grid shows everyone's professions and skill, so you know who to ask for a craft. The dungeons tab shows which friends are close to your level and the dungeons you can run together, and a heatmap shows the hours each friend usually plays, in your own time zone.
+
+![The roster: every friend's characters, levels and whereabouts](./images/bff-wow-roster.jpg)
 
 ![Every friend's professions and skill in one grid](./images/bff-wow-professions.jpg)
 
 ![Dungeons you can run together with friends close to your level](./images/bff-wow-together.jpg)
+
+![A heatmap of when each friend usually plays](./images/bff-wow-when.jpg)
 
 There is no server, no account and no shared guild. One friend types `/bff start` and shares a crew code, and the others type `/bff join` with it. Behind the scenes BFF joins a hidden chat channel to find out who else in the crew is online, then sends each update as an addon whisper. Every member keeps a copy of everyone's records and passes on what they know, so news reaches friends who were offline when it happened.
 
