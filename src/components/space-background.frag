@@ -80,8 +80,11 @@ float fbm2(vec2 p) {
   return s;
 }
 
-// Ordered dither thresholds in 0..1.
-float bayer2(vec2 a) { a = floor(a); return fract(dot(a, vec2(0.5, a.y * 0.75))); }
+// Ordered dither thresholds in 0..1. Wrapping to the 2x2 cell first keeps
+// the numbers tiny: with raw pixel rows, a.y * a.y overflows float precision
+// near the top of large canvases on some GPUs (Metal), the threshold drops
+// to 0 or below and empty sky lights up as a uniform dot grid.
+float bayer2(vec2 a) { a = mod(floor(a), 2.0); return fract(dot(a, vec2(0.5, a.y * 0.75))); }
 float bayer4(vec2 a) { return bayer2(0.5 * a) * 0.25 + bayer2(a); }
 float bayer8(vec2 a) { return bayer4(0.5 * a) * 0.25 + bayer2(a); }
 
