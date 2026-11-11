@@ -1,6 +1,6 @@
 ---
 name: BFF – Best Friends in Forever
-description: "A WoW: Forever addon that keeps a friend group in touch, even when nobody plays at the same time"
+description: "A WoW: Forever addon that keeps your friends' dings, deaths and adventures in view, even when you play at different times"
 date: 2026-10-31
 slug: bff-wow
 link: https://www.github.com/shtian/bff-wow
