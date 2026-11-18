@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 ---
 
-<script is:inline>
+<script>
 function copyDiscordUsername() {
   navigator.clipboard.writeText("shtian");
   const toast = document.getElementById("discord-toast");
@@ -14,12 +14,16 @@ function copyDiscordUsername() {
   }, 5000);
 }
 
-// Add typewriter effect
 document.addEventListener("astro:page-load", () => {
-  const heading = document.querySelector(".typewriter");
+  document
+    .querySelector("[data-copy-discord]")
+    ?.addEventListener("click", copyDiscordUsername);
+
+  // Add typewriter effect
+  const heading = document.querySelector<HTMLElement>(".typewriter");
   // The page-load listener outlives the home page under the ClientRouter.
   if (!heading) return;
-  const text = heading.textContent;
+  const text = heading.textContent ?? "";
   const width = heading.offsetWidth;
   const height = heading.offsetHeight;
   heading.style.width = `${width}px`;
@@ -29,6 +33,7 @@ document.addEventListener("astro:page-load", () => {
   let i = 0;
 
   function type() {
+    if (!heading) return;
     if (i < text.length) {
       heading.textContent += text.charAt(i);
       i++;
@@ -132,7 +137,7 @@ document.addEventListener("astro:page-load", () => {
         </div>
         <button
           type="button"
-          onclick="copyDiscordUsername()"
+          data-copy-discord
           class="text-foreground/50 hover:text-foreground transition-colors"
           title="Click to copy Discord username"
         >

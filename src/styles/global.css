@@ -1,4 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@import "@fontsource/lato/100.css";
+@import "@fontsource/lato/300.css";
+@import "@fontsource/lato/400.css";
+@import "@fontsource/lato/700.css";
+@import "@fontsource/lato/900.css";
+@import "@fontsource/lato/100-italic.css";
+@import "@fontsource/lato/300-italic.css";
+@import "@fontsource/lato/400-italic.css";
+@import "@fontsource/lato/700-italic.css";
+@import "@fontsource/lato/900-italic.css";
+@import "@fontsource-variable/caveat/wght.css";
 @import "tailwindcss";
 @plugin '@tailwindcss/typography';
 
@@ -10,7 +20,7 @@
   --color-accent: oklch(var(--accent));
 
   --font-sans: "Lato", system-ui, sans-serif;
-  --font-caveat: "Caveat", ui-serif, serif;
+  --font-caveat: "Caveat Variable", ui-serif, serif;
 
   --animate-twinkle: twinkle 2s;
 

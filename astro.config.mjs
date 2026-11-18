@@ -27,6 +27,8 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    // Never inline scripts into the HTML, so the CSP can use script-src 'self'.
+    build: { assetsInlineLimit: 0 },
   },
 
   integrations: [react()],

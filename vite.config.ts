@@ -8,7 +8,7 @@ export default defineConfig({
     ignorePatterns: [".claude/skills/**", "src/styles/global.css"],
   },
   lint: {
-    ignorePatterns: [".claude/skills/**", "src/components/PostHog.astro"],
+    ignorePatterns: [".claude/skills/**", "src/scripts/posthog.js"],
     jsPlugins: [{ name: "vite-plus", specifier: "vite-plus/oxlint-plugin" }],
     rules: { "vite-plus/prefer-vite-plus-imports": "error" },
     options: { typeAware: true, typeCheck: true },

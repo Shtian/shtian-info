@@ -8,7 +8,7 @@ colors:
   starlight-grey: "oklch(90% 0.004 297)"
 typography:
   wordmark:
-    fontFamily: "Caveat, ui-serif, serif"
+    fontFamily: "Caveat Variable, ui-serif, serif"
     fontSize: "3.75rem"
     fontWeight: 400
     lineHeight: 1
@@ -43,7 +43,7 @@ typography:
     fontWeight: 400
     lineHeight: 1.33
   script-accent:
-    fontFamily: "Caveat, ui-serif, serif"
+    fontFamily: "Caveat Variable, ui-serif, serif"
     fontSize: "1.125rem"
     fontWeight: 700
     lineHeight: 1.55
@@ -136,9 +136,9 @@ The background planets are a muted slate-blue banded gas giant and a muted emera
 
 **Display Font:** Lato (with system-ui, sans-serif)
 **Body Font:** Lato (with system-ui, sans-serif)
-**Script Font:** Caveat (with ui-serif, serif)
+**Script Font:** Caveat Variable (with ui-serif, serif)
 
-**Character:** Lato is the chart: friendly, even and readable. Caveat is the pencil annotation on top. Both load from Google Fonts in `global.css`.
+**Character:** Lato is the chart: friendly, even and readable. Caveat is the pencil annotation on top. Both are self-hosted through Fontsource packages imported in `global.css`. Don't load fonts from a third-party CDN: the CSP in `vercel.json` only allows same-origin fonts and stylesheets.
 
 ### Hierarchy
 
